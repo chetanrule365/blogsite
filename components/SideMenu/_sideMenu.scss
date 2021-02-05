@@ -1,0 +1,49 @@
+menu {
+    background: white;
+    transition: 0.3s;
+    header {
+        @include flex-center(row, space-between, center);
+        .title {
+            font-weight: 500;
+            font-size: 30px;
+            color: map-get($map: $colors, $key: primary);
+            padding: 16px;
+            padding-bottom: 0;
+            background: white;
+            @media screen and (max-width: $tab-width) {
+                font-size: 24px;
+            }
+        }
+        .close {
+            margin-bottom: -16px;
+            margin-right: 16px;
+        }
+    }
+    ul {
+        list-style: none;
+        background: map-get($map: $colors, $key: primary);
+        .link {
+            text-decoration: none;
+            color: black;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        li.dup {
+            padding: 16px;
+            background: rgb(255, 255, 255)
+        }
+        li {
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 16px;
+            background: white;
+            transition: 0.3s;
+        }
+        li.active {
+            background: transparent;
+            color: white;
+        }
+    }
+}

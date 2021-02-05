@@ -1,0 +1,21 @@
+$mob-width: 500px;
+$tab-width: 750px;
+$tab-end-width: 1024px;
+$colors: (
+    primary: #00b0fb,
+    favourite: rgb(252, 113, 136),
+);
+:root {
+    --bkground-color: #ffffff;
+    --bkground-color-dark: rgb(255, 255, 255);
+    --color: #000000;
+    --shadow-color: rgb(228, 228, 228);
+}
+@media (prefers-color-scheme: dark) {
+    body {
+        --bkground-color-dark: rgb(36, 36, 36);
+        --bkground-color: #272727;
+        --color: #ffffff;
+        --shadow-color: rgb(75, 75, 75);
+    }
+}

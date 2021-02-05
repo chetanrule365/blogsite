@@ -1,0 +1,42 @@
+.home {
+    padding: 32px 100px;
+    @media screen and (max-width: $tab-end-width) {
+        padding: 32px;
+    }
+    @media screen and (max-width: $mob-width) {
+        padding: 16px;
+    }
+    .headline{
+        @include flex-center(row, flex-start, center);
+        p{
+            margin-left: 8px;
+        }
+        margin-bottom: 8px;
+    }
+    .trending-cards {
+        display: grid;
+        grid-column-gap: 70px;
+        grid-row-gap: 20px;
+        @media screen and (min-width: $tab-end-width) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+        @media screen and (max-width: $tab-end-width) {
+            grid-template-columns: 1fr 1fr;
+        }
+        @media screen and (max-width: 600px) {
+            grid-template-columns: 1fr;
+        }
+        margin-bottom: 50px;
+    }
+    .blog-cards {
+        padding-top: 40px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-column-gap: 70px;
+        grid-row-gap: 20px;
+        @media screen and (min-width: $tab-end-width) {
+            grid-template-columns: 1fr 1fr;
+        }
+        border-top: 2px solid rgb(136, 136, 136);
+    }
+}

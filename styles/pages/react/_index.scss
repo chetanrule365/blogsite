@@ -1,0 +1,72 @@
+#react {
+    @include flex-center(row, flex-end, flex-start);
+    @media screen and (max-width: $tab-width) {
+        @include flex-center(column, center, center);
+    }
+    height: calc(100vh - 80px);
+    #sidemenu {
+        width: 30%;
+        height: 100%;
+        background: white;
+        height: 100%;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        @media screen and (max-width: $tab-width) {
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        header {
+            padding: 16px;
+            padding-bottom: 0;
+            padding-right: 0;
+            @include flex-center(row, space-between, center);
+            p {
+                color: map-get($map: $colors, $key: primary);
+                font-size: 24px;
+                font-weight: 500;
+            }
+            #menubtn {
+                background: map-get($map: $colors, $key: primary);
+                @include flex-center();
+                padding: 5px 8px;
+                border-bottom-left-radius: 50%;
+                border-top-left-radius: 50%;
+                cursor: pointer;
+                .btn {
+                    color: white;
+                }
+            }
+        }
+    }
+    main {
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll;
+        background: map-get($map: $colors, $key: primary);
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        #menubtn-open {
+            background: white;
+            padding: 5px 8px;
+            width: min-content;
+            margin-top: 16px;
+            @include flex-center();
+            opacity: 0;
+            border-bottom-right-radius: 50%;
+            border-top-right-radius: 50%;
+            cursor: pointer;
+            .btn {
+                color: map-get($map: $colors, $key: primary);
+            }
+        }
+        .content {
+            padding: 16px;
+        }
+    }
+}

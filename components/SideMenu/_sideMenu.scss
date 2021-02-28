@@ -40,6 +40,9 @@ menu {
             padding: 16px;
             background: white;
             transition: 0.3s;
+            @media screen and (min-width: $tab-width) and (max-width: $tab-end-width) {
+                font-size: 14px;
+            }
         }
         li.active {
             background: transparent;

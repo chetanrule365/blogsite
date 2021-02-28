@@ -352,6 +352,7 @@ body {
       -ms-flex-align: start;
           align-items: flex-start;
   height: calc(100vh - 80px);
+  width: 100vw;
 }
 
 @media screen and (max-width: 750px) {
@@ -417,6 +418,7 @@ body {
   color: #00b0fb;
   font-size: 24px;
   font-weight: 500;
+  cursor: pointer;
 }
 
 #react #sidemenu header #menubtn {
@@ -487,6 +489,42 @@ body {
 
 #react main .content {
   padding: 16px;
+  padding-top: 8px;
+  color: white;
+}
+
+@media screen and (min-width: 1024px) {
+  #react main .content {
+    padding: 32px;
+    padding-top: 8px;
+  }
+}
+
+#react main .content h2 {
+  color: white;
+  margin-bottom: 16px;
+}
+
+#react main .content h3 {
+  margin-top: 16px;
+}
+
+#react main .content p {
+  margin: 16px 0;
+  font-weight: 500;
+}
+
+#react main .content a {
+  text-decoration: none;
+  background: #99f3ec;
+  color: black;
+  padding: 4px 16px;
+  font-weight: 500;
+}
+
+#react main .content img {
+  width: 100%;
+  margin-top: 16px;
 }
 
 menu {
@@ -560,8 +598,18 @@ menu ul li {
   transition: 0.3s;
 }
 
+@media screen and (min-width: 750px) and (max-width: 1024px) {
+  menu ul li {
+    font-size: 14px;
+  }
+}
+
 menu ul li.active {
   background: transparent;
   color: white;
+}
+
+.syntaxhighlighter {
+  border-radius: 10px;
 }
 /*# sourceMappingURL=globals.css.map */

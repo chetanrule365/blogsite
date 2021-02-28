@@ -1,27 +1,22 @@
 import { CloseRounded, Menu } from "@material-ui/icons";
 import Head from "next/head";
-import { useEffect, useState } from "react";
-import { closeMenu, openMenu } from "../../components/Animations/MenuToggle";
+import Link from "next/link";
+import { useEffect } from "react";
+import { closeMenu, openMenu } from "../../Animations/MenuToggle";
+import CodeMaker from "../../components/CodeMaker/CodeMaker";
 import SideMenu from "../../components/SideMenu/SideMenu";
 import { react_sidemenu_data } from "../../components/SideMenu/sideMenu_data";
 
 export default function create_react_app() {
     let ele: HTMLElement | null;
     let menubtnEle_open: HTMLElement | null;
-    let isMobile: Boolean;
-    const [toggle, setToggle] = useState(false);
     useEffect(() => {
         ele = document.getElementById("sidemenu");
         menubtnEle_open = document.getElementById("menubtn-open");
-        isMobile = window.innerWidth <= 750;
-        console.log("assigned" + toggle);
-    }, [toggle]);
-    useEffect(() => {
         setTimeout(() => {
-            if (isMobile) closeMenu(ele, menubtnEle_open);
+            if (window.innerWidth <= 750) closeMenu(ele, menubtnEle_open);
         }, 700);
-        console.log("initial close");
-    }, []);
+    });
     return (
         <>
             <Head>
@@ -31,11 +26,12 @@ export default function create_react_app() {
             <div id='react'>
                 <div id='sidemenu'>
                     <header>
-                        <p>React Tutorial</p>
+                        <Link href='/react'>
+                            <p>React Tutorial</p>
+                        </Link>
                         <div
                             id='menubtn'
                             onClick={() => {
-                                setToggle(!toggle);
                                 closeMenu(ele, menubtnEle_open);
                             }}>
                             <CloseRounded className='btn' />
@@ -47,78 +43,53 @@ export default function create_react_app() {
                     <div
                         id='menubtn-open'
                         onClick={() => {
-                            setToggle(!toggle);
-                            openMenu(ele, isMobile, menubtnEle_open);
+                            openMenu(
+                                ele,
+                                window.innerWidth <= 750,
+                                menubtnEle_open,
+                            );
                         }}>
                         <Menu className='btn' />
                     </div>
                     <div className='content'>
+                        <h2>Create-react-app</h2>
                         <p>
                             Create React App is a comfortable environment for
                             learning React, and is the best way to start
-                            building a new single-page application in React.To
-                            create a project, run:
+                            building a new single-page application in React.
                         </p>
                         <p>
-                            npx create-react-app my-app <br />
-                            cd my-app <br />
-                            npm start
+                            1. First, you need to install node.js on your
+                            computer.
                         </p>
-                        <p>
-                            Create React App is a comfortable environment for
-                            learning React, and is the best way to start
-                            building a new single-page application in React.To
-                            create a project, run:
-                        </p>
-                        <p>
-                            npx create-react-app my-app <br />
-                            cd my-app <br />
-                            npm start
-                        </p>
-                        <p>
-                            Create React App is a comfortable environment for
-                            learning React, and is the best way to start
-                            building a new single-page application in React.To
-                            create a project, run:
-                        </p>
-                        <p>
-                            npx create-react-app my-app <br />
-                            cd my-app <br />
-                            npm start
-                        </p>
-                        <p>
-                            Create React App is a comfortable environment for
-                            learning React, and is the best way to start
-                            building a new single-page application in React.To
-                            create a project, run:
-                        </p>
-                        <p>
-                            npx create-react-app my-app <br />
-                            cd my-app <br />
-                            npm start
-                        </p>
-                        <p>
-                            Create React App is a comfortable environment for
-                            learning React, and is the best way to start
-                            building a new single-page application in React.To
-                            create a project, run:
-                        </p>
-                        <p>
-                            npx create-react-app my-app <br />
-                            cd my-app <br />
-                            npm start
-                        </p>
-                        <p>
-                            Create React App is a comfortable environment for
-                            learning React, and is the best way to start
-                            building a new single-page application in React.To
-                            create a project, run:
-                        </p>
-                        <p>
-                            npx create-react-app my-app <br />
-                            cd my-app <br />
-                            npm start
-                        </p>
+                        <a
+                            href='https://nodejs.org/en/'
+                            target='_blank'
+                            rel='noopener noreferrer'>
+                            Install Node.js
+                        </a>
+                        <p>2. After installing node.js, the next step is to create-react-app.</p>
+                        <p>To create react app, run:</p>
+                        <CodeMaker
+                            code={`//in terminal
+npx create-react-app my_app
+//Here my_app is the app name`}
+                        />
+                        <p>If react app is successfully created you have to see this.</p>
+                        <img src="/assets/create-react-app/create-react-app.png" alt="create-react-app"/>
+                        <p>3. Then go to the created react app.</p>
+                        <CodeMaker
+                            code={`//in terminal
+cd my_app`}
+                        />
+                        <p>4. Finally run the app. To run:</p>
+                        <CodeMaker
+                            code={`//in terminal
+npm run start`}
+                        />
+                        <img src="/assets/create-react-app/app-run.png" alt="run"/>
+                        <h2>Output:</h2>
+                        <img src="/assets/create-react-app/app-run-output.png" alt="output"/>
                     </div>
                 </main>
             </div>

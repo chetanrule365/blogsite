@@ -1,9 +1,6 @@
 import Link from "next/link";
 import { useEffect } from "react";
 interface sidemenuProps {
-    /**
-     * Array<{ text: String; link: String }>
-     */
     data: Array<{ text: String; link: String }>;
     activeEle: Number | null;
 }

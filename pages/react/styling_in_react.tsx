@@ -2,25 +2,19 @@ import { CloseRounded, Menu } from "@material-ui/icons";
 import Head from "next/head";
 import SideMenu from "../../components/SideMenu/SideMenu";
 import { react_sidemenu_data } from "../../components/SideMenu/sideMenu_data";
-import { useEffect, useState } from "react";
-import { closeMenu, openMenu } from "../../components/Animations/MenuToggle";
+import { useEffect } from "react";
+import { closeMenu, openMenu } from "../../Animations/MenuToggle";
+import Link from "next/link";
 export default function styling_in_react() {
     let ele: HTMLElement | null;
     let menubtnEle_open: HTMLElement | null;
-    let isMobile: Boolean;
-    const [toggle, setToggle] = useState(false);
     useEffect(() => {
         ele = document.getElementById("sidemenu");
         menubtnEle_open = document.getElementById("menubtn-open");
-        isMobile = window.innerWidth <= 750;
-        console.log("assigned" + toggle);
-    }, [toggle]);
-    useEffect(() => {
         setTimeout(() => {
-            if (isMobile) closeMenu(ele, menubtnEle_open);
+            if (window.innerWidth <= 750) closeMenu(ele, menubtnEle_open);
         }, 700);
-        console.log("initial close");
-    }, []);
+    });
     return (
         <>
             <Head>
@@ -30,11 +24,12 @@ export default function styling_in_react() {
             <div id='react'>
                 <div id='sidemenu'>
                     <header>
-                        <p>React Tutorial</p>
+                        <Link href='/react'>
+                            <p>React Tutorial</p>
+                        </Link>
                         <div
                             id='menubtn'
                             onClick={() => {
-                                setToggle(!toggle);
                                 closeMenu(ele, menubtnEle_open);
                             }}>
                             <CloseRounded className='btn' />
@@ -46,8 +41,11 @@ export default function styling_in_react() {
                     <div
                         id='menubtn-open'
                         onClick={() => {
-                            setToggle(!toggle);
-                            openMenu(ele, isMobile, menubtnEle_open);
+                            openMenu(
+                                ele,
+                                window.innerWidth <= 750,
+                                menubtnEle_open,
+                            );
                         }}>
                         <Menu className='btn' />
                     </div>

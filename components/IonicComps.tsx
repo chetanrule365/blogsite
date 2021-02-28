@@ -14,4 +14,5 @@ const IonToolbar = dynamic(
     },
     { ssr: false },
 );
-export {IonHeader, IonToolbar}
+
+export { IonHeader, IonToolbar };

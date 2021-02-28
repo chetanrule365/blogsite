@@ -4,6 +4,7 @@
         @include flex-center(column, center, center);
     }
     height: calc(100vh - 80px);
+    width: 100vw;
     #sidemenu {
         width: 30%;
         height: 100%;
@@ -29,6 +30,7 @@
                 color: map-get($map: $colors, $key: primary);
                 font-size: 24px;
                 font-weight: 500;
+                cursor: pointer;
             }
             #menubtn {
                 background: map-get($map: $colors, $key: primary);
@@ -67,6 +69,34 @@
         }
         .content {
             padding: 16px;
+            padding-top: 8px;
+            @media screen and (min-width: $tab-end-width) {
+                padding: 32px;
+                padding-top: 8px;
+            }
+            color: white;
+            h2{
+                color: rgb(255, 255, 255);
+                margin-bottom: 16px;
+            }
+            h3{
+                margin-top: 16px;
+            }
+            p{
+                margin: 16px 0;
+                font-weight: 500;
+            }
+            a{
+                text-decoration: none;
+                background: rgb(153, 243, 236);
+                color: rgb(0, 0, 0);
+                padding: 4px 16px;
+                font-weight: 500;
+            }
+            img{
+                width: 100%;
+                margin-top: 16px;
+            }
         }
     }
 }

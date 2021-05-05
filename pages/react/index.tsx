@@ -14,6 +14,10 @@ export default function index() {
         setTimeout(() => {
             if (window.innerWidth <= 750) closeMenu(ele, menubtnEle_open);
         }, 700);
+        window.addEventListener("resize", () => {
+            if (window.innerWidth <= 750)
+                if (ele) ele.style.width = `${window.innerWidth}px`;
+        });
     });
     return (
         <>
@@ -23,6 +27,7 @@ export default function index() {
             </Head>
             <div id='react'>
                 <div id='sidemenu'>
+                    <div className='bg-dup'></div>
                     <header>
                         <Link href='/react'>
                             <p>React Tutorial</p>

@@ -15,11 +15,15 @@ export default function jsx_in_react() {
         setTimeout(() => {
             if (window.innerWidth <= 750) closeMenu(ele, menubtnEle_open);
         }, 700);
+        window.addEventListener("resize", () => {
+            if (window.innerWidth <= 750)
+                if (ele) ele.style.width = `${window.innerWidth}px`;
+        });
     });
     return (
         <>
             <Head>
-                <title>Jsx-in-react.js</title>
+                <title>Jsx-in-react</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
             <div id='react'>
@@ -67,7 +71,7 @@ export default function jsx_in_react() {
                             the full power of JavaScript.
                         </p>
                         <h3>Lets look into 'App.js' in 'src' folder</h3>
-                        <img src="/assets/jsx/2.png" alt="App.js"/>
+                        <img src='/assets/jsx/2.png' alt='App.js' />
                         <h3>Remove the default 'header' tag and code this.</h3>
                         <CodeMaker
                             code={`// In App.js
@@ -83,8 +87,11 @@ function App() {
 
 export default App;`}
                         />
-                        <h3>Now save code run app. To run, open Terminal in vs-code by pressing 'cmd+`' and run cmd:</h3>
-                        <CodeMaker code={"npm run start"}/>
+                        <h3>
+                            Now save code run app. To run, open Terminal in
+                            vs-code by pressing 'cmd+`' and run cmd:
+                        </h3>
+                        <CodeMaker code={"npm run start"} />
                         <h2>Using JSX</h2>
                         <CodeMaker
                             code={`import React from "react";
@@ -109,7 +116,10 @@ function Component() {
 export default Component;`}
                         />
                         <h2>Output:</h2>
-                        <img src="/assets/jsx/jsx-output.png" alt="jsx-output"/>
+                        <img
+                            src='/assets/jsx/jsx-output.png'
+                            alt='jsx-output'
+                        />
                     </div>
                 </main>
             </div>

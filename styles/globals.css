@@ -33,6 +33,7 @@ body {
 }
 
 .layout {
+  width: 100vw;
   min-height: 100vh;
   display: -ms-grid;
   display: grid;
@@ -376,9 +377,9 @@ body {
 #react #sidemenu {
   width: 30%;
   height: 100%;
-  background: white;
-  height: 100%;
   overflow-y: scroll;
+  position: relative;
+  background: #70d4ff;
 }
 
 #react #sidemenu::-webkit-scrollbar {
@@ -412,45 +413,41 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  background: #70d4ff;
 }
 
 #react #sidemenu header p {
-  color: #00b0fb;
   font-size: 24px;
   font-weight: 500;
   cursor: pointer;
 }
 
 #react #sidemenu header #menubtn {
-  background: #00b0fb;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 5px 8px;
-  border-bottom-left-radius: 50%;
-  border-top-left-radius: 50%;
   cursor: pointer;
+  margin-right: 8px;
 }
 
 #react #sidemenu header #menubtn .btn {
-  color: white;
+  color: #fc7188;
+  font-size: 32px;
+}
+
+#react #sidemenu .bg-dup {
+  width: 100%;
+  height: 100%;
+  background: #70d4ff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
 #react main {
   width: 100%;
   height: 100%;
   overflow-y: scroll;
-  background: #00b0fb;
+  background: white;
+  color: black;
 }
 
 #react main::-webkit-scrollbar {
@@ -458,39 +455,18 @@ body {
 }
 
 #react main #menubtn-open {
-  background: white;
-  padding: 5px 8px;
-  width: -webkit-min-content;
-  width: -moz-min-content;
-  width: min-content;
-  margin-top: 16px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  opacity: 0;
-  border-bottom-right-radius: 50%;
-  border-top-right-radius: 50%;
   cursor: pointer;
 }
 
 #react main #menubtn-open .btn {
-  color: #00b0fb;
+  color: #fc7188;
+  font-size: 36px;
+  margin: 16px 0 0 16px;
 }
 
 #react main .content {
   padding: 16px;
   padding-top: 8px;
-  color: white;
 }
 
 @media screen and (min-width: 1024px) {
@@ -501,7 +477,6 @@ body {
 }
 
 #react main .content h2 {
-  color: white;
   margin-bottom: 16px;
 }
 
@@ -528,50 +503,13 @@ body {
 }
 
 menu {
-  background: white;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 
-menu header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-menu header .title {
-  font-weight: 500;
-  font-size: 30px;
-  color: #00b0fb;
-  padding: 16px;
-  padding-bottom: 0;
-  background: white;
-}
-
-@media screen and (max-width: 750px) {
-  menu header .title {
-    font-size: 24px;
-  }
-}
-
-menu header .close {
-  margin-bottom: -16px;
-  margin-right: 16px;
-}
-
 menu ul {
+  background: white;
   list-style: none;
-  background: #00b0fb;
 }
 
 menu ul .link {
@@ -585,7 +523,7 @@ menu ul .link:hover {
 
 menu ul li.dup {
   padding: 16px;
-  background: white;
+  background: #70d4ff;
 }
 
 menu ul li {
@@ -593,7 +531,7 @@ menu ul li {
   font-size: 16px;
   cursor: pointer;
   padding: 16px;
-  background: white;
+  background: #70d4ff;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
@@ -605,8 +543,8 @@ menu ul li {
 }
 
 menu ul li.active {
-  background: transparent;
-  color: white;
+  background: white;
+  font-size: 18px;
 }
 
 .syntaxhighlighter {

@@ -16,6 +16,10 @@ export default function create_react_app() {
         setTimeout(() => {
             if (window.innerWidth <= 750) closeMenu(ele, menubtnEle_open);
         }, 700);
+        window.addEventListener("resize", () => {
+            if (window.innerWidth <= 750)
+                if (ele) ele.style.width = `${window.innerWidth}px`;
+        });
     });
     return (
         <>
@@ -68,15 +72,24 @@ export default function create_react_app() {
                             rel='noopener noreferrer'>
                             Install Node.js
                         </a>
-                        <p>2. After installing node.js, the next step is to create-react-app.</p>
+                        <p>
+                            2. After installing node.js, the next step is to
+                            create-react-app.
+                        </p>
                         <p>To create react app, run:</p>
                         <CodeMaker
                             code={`//in terminal
 npx create-react-app my_app
 //Here my_app is the app name`}
                         />
-                        <p>If react app is successfully created you have to see this.</p>
-                        <img src="/assets/create-react-app/create-react-app.png" alt="create-react-app"/>
+                        <p>
+                            If react app is successfully created you have to see
+                            this.
+                        </p>
+                        <img
+                            src='/assets/create-react-app/create-react-app.png'
+                            alt='create-react-app'
+                        />
                         <p>3. Then go to the created react app.</p>
                         <CodeMaker
                             code={`//in terminal
@@ -87,9 +100,15 @@ cd my_app`}
                             code={`//in terminal
 npm run start`}
                         />
-                        <img src="/assets/create-react-app/app-run.png" alt="run"/>
+                        <img
+                            src='/assets/create-react-app/app-run.png'
+                            alt='run'
+                        />
                         <h2>Output:</h2>
-                        <img src="/assets/create-react-app/app-run-output.png" alt="output"/>
+                        <img
+                            src='/assets/create-react-app/app-run-output.png'
+                            alt='output'
+                        />
                     </div>
                 </main>
             </div>

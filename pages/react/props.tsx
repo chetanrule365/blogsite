@@ -12,6 +12,7 @@ function props() {
     useEffect(() => {
         ele = document.getElementById("sidemenu");
         menubtnEle_open = document.getElementById("menubtn-open");
+        openMenu(ele, window.innerWidth <= 750, menubtnEle_open);
         setTimeout(() => {
             if (window.innerWidth <= 750) closeMenu(ele, menubtnEle_open);
         }, 700);

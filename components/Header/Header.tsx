@@ -2,11 +2,14 @@ import { Avatar, IconButton } from "@material-ui/core";
 
 export default function Header() {
     return (
-        <header className="main-header">
+        <header className='main-header'>
             <IconButton>
-                <Avatar />
+                {/* <Avatar src='/vercel.svg' /> */}
+                <img src='/vercel.svg' alt='logo' className='logo' />
             </IconButton>
-            <p>Hello, user!</p>
+            <p>
+                <em>Good Morning!</em>, Chetan
+            </p>
         </header>
     );
 }

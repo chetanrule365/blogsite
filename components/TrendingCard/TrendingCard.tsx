@@ -23,11 +23,15 @@ export default function TrendingCard({
                     <div className='title'>{title}</div>
                 </Link>
                 <div className='bottom'>
-                    <div className='timestamp'>
-                        {timestamp}. By {user}
-                    </div>
+                    <Link href={`${url}`}>
+                        <div className='timestamp'>
+                            {timestamp}. By {user}
+                        </div>
+                    </Link>
                     <div className='right'>
-                        <IconButton className="fav_btn" style={{ padding: "8px" }}>
+                        <IconButton
+                            className='fav_btn'
+                            style={{ padding: "8px" }}>
                             <FavoriteBorderRounded
                                 style={{ width: "20px", height: "20px" }}
                             />

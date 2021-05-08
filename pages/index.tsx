@@ -6,7 +6,7 @@ export default function Home() {
     return (
         <div className='home'>
             <Head>
-                <title>My Blogsite</title>
+                <title>TechBlog</title>
             </Head>
             <div className='headline'>
                 <TrendingUpRounded />
@@ -15,10 +15,24 @@ export default function Home() {
             <div className='trending-cards'>
                 <TrendingCard
                     sno='01'
-                    title='React Tutorial'
-                    timestamp='Feb 4,2021'
+                    title='ReactJs Tutorial'
+                    timestamp='Feb 4, 2021'
                     user='chetan'
                     url='/react'
+                />
+                <TrendingCard
+                    sno='02'
+                    title='NextJs Tutorial'
+                    timestamp='Apr 14, 2021'
+                    user='chetan'
+                    url='/'
+                />
+                <TrendingCard
+                    sno='03'
+                    title='SCSS Tutorial'
+                    timestamp='May 3, 2021'
+                    user='chetan'
+                    url='/'
                 />
             </div>
             <div className='headline'>
@@ -27,12 +41,28 @@ export default function Home() {
             </div>
             <div className='blog-cards'>
                 <BlogCard
-                    title='React Tutorial'
-                    desc='Learn React.Js.'
-                    timestamp='Feb 4,2021'
+                    title='ReactJs Tutorial'
+                    desc='Learn ReactJs.'
+                    timestamp='Feb 4, 2021'
                     user='chetan'
                     thumbnail='/reactjs_img.png'
-                    url='/react'
+                    url='/'
+                />
+                <BlogCard
+                    title='NextJs Tutorial'
+                    desc='Learn NextJs.'
+                    timestamp='Apr 14, 2021'
+                    user='chetan'
+                    thumbnail='/nextjs.jpg'
+                    url='/'
+                />
+                <BlogCard
+                    title='SCSS Tutorial'
+                    desc='Learn SCSS.'
+                    timestamp='May 3, 2021'
+                    user='chetan'
+                    thumbnail='/scss.png'
+                    url='/'
                 />
             </div>
         </div>

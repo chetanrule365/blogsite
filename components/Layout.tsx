@@ -8,7 +8,6 @@ function Layout({ children }: any) {
                 <meta name='color-scheme' content='dark light' />
                 <link rel='icon' href='/favicon.ico' />
             </Head>
-            <Header />
             {children}
         </div>
     );

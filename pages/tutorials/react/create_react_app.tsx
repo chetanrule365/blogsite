@@ -2,11 +2,11 @@ import { CloseRounded, Menu } from "@material-ui/icons";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect } from "react";
-import { closeMenu, openMenu } from "../../Animations/MenuToggle";
-import CodeMaker from "../../components/CodeMaker/CodeMaker";
-import SideMenu from "../../components/SideMenu/SideMenu";
-import { react_sidemenu_data } from "../../components/SideMenu/sideMenu_data";
-
+import { closeMenu, openMenu } from "../../../Animations/MenuToggle";
+import CodeMaker from "../../../components/CodeMaker/CodeMaker";
+import SideMenu from "../../../components/SideMenu/SideMenu";
+import { react_sidemenu_data } from "../../../components/SideMenu/sideMenu_data";
+import Header from "../../../components/Header/Header";
 export default function create_react_app() {
     let ele: HTMLElement | null;
     let menubtnEle_open: HTMLElement | null;
@@ -28,10 +28,11 @@ export default function create_react_app() {
                 <title>Create-react-app</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
+            <Header switchURL='' />
             <div id='react'>
                 <div id='sidemenu'>
                     <header>
-                        <Link href='/react'>
+                        <Link href='/tutorials/react'>
                             <p>React Tutorial</p>
                         </Link>
                         <div

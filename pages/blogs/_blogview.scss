@@ -1,0 +1,38 @@
+.blogview {
+    width: $tabWidth;
+    @media screen and (max-width: $tabWidth) {
+        width: 100%;
+    }
+    padding: 16px;
+    margin: auto;
+    .title {
+        font-size: 25px;
+        font-weight: 600;
+    }
+    .desc {
+        margin-top: 8px;
+        .bottom {
+            @include flex-center(row, space-between, center);
+            p {
+                font-size: 10px;
+                margin-top: 15px;
+            }
+        }
+    }
+    #thumbnail {
+        height: 350px;
+        margin: 50px 0;
+        overflow: hidden;
+        position: relative;
+        img {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            height: 100%;
+        }
+    }
+    code {
+        white-space: pre-wrap !important;
+    }
+}

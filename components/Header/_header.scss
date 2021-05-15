@@ -1,22 +1,141 @@
-.main-header {
-    @include flex-center(row, flex-start, center);
-    box-shadow: 0px 2px 3px var(--shadow-color);
-    width: 100%;
-    height: 80px;
-    position: sticky;
-    top: 0;
-    background: var(--bkground-color-dark);
-    padding: 0 100px;
-    @media screen and (max-width: $tab-end-width) {
-        padding: 0 32px;
+.main-header-con {
+    .switch {
+        background: white;
+        border: 2px solid black;
+        color: black !important;
+        text-transform: none;
+        font-size: 16px;
+        &:hover {
+            background: rgba(
+                $color: map-get($map: $colors, $key: favourite),
+                $alpha: 0.3
+            );
+        }
     }
-    @media screen and (max-width: $mob-width) {
-        padding: 0 16px;
+    .signin_butt {
+        background: rgba(
+            $color: map-get($map: $colors, $key: secondary),
+            $alpha: 1
+        );
+        border: 2px solid black;
+        &:hover {
+            background: rgba(
+                $color: map-get($map: $colors, $key: secondary),
+                $alpha: 0.8
+            );
+        }
     }
-    .logo {
-        width: 100px;
+    .main-header {
+        @include flex-center(row, space-between, center);
+        box-shadow: 0px 2px 3px var(--shadow-color);
+        width: 100vw;
+        height: 80px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: map-get($map: $colors, $key: primary);
+        padding: 0 100px;
+        z-index: 10;
+        @media screen and (max-width: $tab-end-width) {
+            padding: 0 32px;
+        }
+        @media screen and (max-width: $mob-width) {
+            padding: 0 16px;
+        }
+        .left {
+            color: white;
+            @include flex-center(row, flex-start, center);
+            .logo {
+                width: 100px;
+            }
+            hr {
+                background: rgb(255, 255, 255);
+                border-color: rgb(255, 255, 255);
+                width: 35px;
+                transform-origin: center;
+                transform: rotate(90deg);
+            }
+            p {
+                font-weight: 600;
+            }
+        }
+        .menuButt {
+            svg {
+                font-size: 40px;
+                color: white;
+            }
+        }
+        #right {
+            @include flex-center(row, flex-end, center);
+            width: 70%;
+            .search {
+                border: 2px solid map-get($map: $colors, $key: primary);
+                border-radius: 5px;
+                @include flex-center(row, center, center);
+                padding: 6px 12px;
+                width: 50%;
+                background: white;
+                input {
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                }
+            }
+            Button {
+                color: white;
+                margin-left: 16px;
+            }
+            .avatar {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
     }
-    p {
-        font-weight: 600;
+    #sidemenu {
+        z-index: 11;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        transform: translateX(-100%);
+        transition: 0.3s;
+        padding: 16px;
+        width: 500px;
+        @media screen and (max-width: 500px) {
+            width: 100%;
+        }
+        background: blueviolet;
+        @include flex-center(column, space-between, center);
+        header {
+            width: 100%;
+            @include flex-center(row, space-between, center);
+            img {
+                width: 150px;
+            }
+            .back {
+                transition: 0.3s;
+                color: white;
+                svg {
+                    font-size: 32px;
+                }
+            }
+        }
+        .tabs {
+            width: 100%;
+            @include flex-center(column, center, center);
+            Button {
+                width: 70%;
+                margin: 16px 0;
+            }
+        }
+        &.show {
+            transform: translateX(0);
+            & > .back {
+                transform: rotate(360deg);
+                transform-origin: center;
+            }
+        }
     }
 }

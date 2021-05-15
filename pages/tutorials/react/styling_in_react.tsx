@@ -1,12 +1,13 @@
 import { CloseRounded, Menu } from "@material-ui/icons";
 import Head from "next/head";
-import Link from "next/link";
+import SideMenu from "../../../components/SideMenu/SideMenu";
+import { react_sidemenu_data } from "../../../components/SideMenu/sideMenu_data";
 import { useEffect } from "react";
-import { closeMenu, openMenu } from "../../Animations/MenuToggle";
-import SideMenu from "../../components/SideMenu/SideMenu";
-import { react_sidemenu_data } from "../../components/SideMenu/sideMenu_data";
-
-export default function stripping_the_folders() {
+import { closeMenu, openMenu } from "../../../Animations/MenuToggle";
+import Link from "next/link";
+import CodeMaker from "../../../components/CodeMaker/CodeMaker";
+import Header from "../../../components/Header/Header";
+export default function styling_in_react() {
     let ele: HTMLElement | null;
     let menubtnEle_open: HTMLElement | null;
     useEffect(() => {
@@ -24,13 +25,14 @@ export default function stripping_the_folders() {
     return (
         <>
             <Head>
-                <title>Stripping the folders</title>
+                <title>Styling in React.js</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
+            <Header switchURL='' />
             <div id='react'>
                 <div id='sidemenu'>
                     <header>
-                        <Link href='/react'>
+                        <Link href='/tutorials/react'>
                             <p>React Tutorial</p>
                         </Link>
                         <div
@@ -41,7 +43,7 @@ export default function stripping_the_folders() {
                             <CloseRounded className='btn' />
                         </div>
                     </header>
-                    <SideMenu data={react_sidemenu_data} activeEle={2} />
+                    <SideMenu data={react_sidemenu_data} activeEle={4} />
                 </div>
                 <main>
                     <div
@@ -56,31 +58,43 @@ export default function stripping_the_folders() {
                         <Menu className='btn' />
                     </div>
                     <div className='content'>
-                        <h2>Look into folders.</h2>
-                        <p>
-                            create-react-app created some default files and
-                            folders. Lets look into those things.
-                        </p>
-                        <h3>1. node_modules</h3>
-                        <p>
-                            'node_modules' is the folder where all the app
-                            dependencies are installed.
-                        </p>
-                        <img src='/assets/folders-info/1.png' alt='1.png' />
-                        <h3>2. public folder</h3>
-                        <p>
-                            'Public folder' contains index.html(which is the
-                            root file that runs on starting the server),
-                            manifest.json and assests(ex: logos).
-                        </p>
-                        <img src='/assets/folders-info/2.png' alt='2.png' />
-                        <h3>3. src folder</h3>
-                        <p>
-                            'src folder' is the folder where all our coding goes
-                            in. We create all the components related to the app
-                            in this folder.
-                        </p>
-                        <img src='/assets/folders-info/3.png' alt='3.png' />
+                        <h3>Styling in React.js</h3>
+
+                        <li>
+                            Inline styles can be added to JSX elements using the
+                            style attribute.
+                        </li>
+                        <li>
+                            Styles are updated within an object, not a set of
+                            double quotes, as with HTML.
+                        </li>
+                        <li>
+                            Note that style property names must be also written
+                            in camelcase.
+                        </li>
+
+                        <CodeMaker
+                            code={`<h1 style={{ color: "blue", fontSize: 22, padding: "0.5em 1em" }}>
+    Hello React!
+</h1>`}
+                        />
+                        <li>
+                            Also like classic way we can add external .css file
+                            to our component.
+                        </li>
+                        <CodeMaker
+                            code={`import './App.css';
+
+function App() {
+  return (
+    <div className="App">
+      <h1>Hello world!</h1>
+    </div>
+  );
+}
+
+export default App;`}
+                        />
                     </div>
                 </main>
             </div>

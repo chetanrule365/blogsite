@@ -1,13 +1,12 @@
-import Link from "next/link";
 import { CloseRounded, Menu } from "@material-ui/icons";
 import Head from "next/head";
-import React, { useEffect } from "react";
-import { closeMenu, openMenu } from "../../Animations/MenuToggle";
-import SideMenu from "../../components/SideMenu/SideMenu";
-import { react_sidemenu_data } from "../../components/SideMenu/sideMenu_data";
-import CodeMaker from "../../components/CodeMaker/CodeMaker";
-
-function functional_components() {
+import SideMenu from "../../../components/SideMenu/SideMenu";
+import { react_sidemenu_data } from "../../../components/SideMenu/sideMenu_data";
+import { useEffect } from "react";
+import { closeMenu, openMenu } from "../../../Animations/MenuToggle";
+import Link from "next/link";
+import Header from "../../../components/Header/Header";
+export default function index() {
     let ele: HTMLElement | null;
     let menubtnEle_open: HTMLElement | null;
     useEffect(() => {
@@ -25,13 +24,15 @@ function functional_components() {
     return (
         <>
             <Head>
-                <title>Functional components in React.js</title>
+                <title>React Tutorial</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
+            <Header switchURL='' />
             <div id='react'>
                 <div id='sidemenu'>
+                    <div className='bg-dup'></div>
                     <header>
-                        <Link href='/react'>
+                        <Link href='/tutorials/react'>
                             <p>React Tutorial</p>
                         </Link>
                         <div
@@ -42,7 +43,7 @@ function functional_components() {
                             <CloseRounded className='btn' />
                         </div>
                     </header>
-                    <SideMenu data={react_sidemenu_data} activeEle={5} />
+                    <SideMenu data={react_sidemenu_data} activeEle={null} />
                 </div>
                 <main>
                     <div
@@ -57,42 +58,26 @@ function functional_components() {
                         <Menu className='btn' />
                     </div>
                     <div className='content'>
-                        <h3>Functional Components in ReactJs</h3>
-                        <li>
-                            JSX can be grouped together within individual
-                            functions called components.
-                        </li>
-                        <li>
-                            Functional Component names are capitalized to
-                            distinguish them from plain JavaScript functions
-                            that do not return JSX.
-                        </li>
-                        <CodeMaker
-                            code={`function App() {
-  return (
-    <div className="App">
-      <h1>Hello world!</h1>
-      <h3>Welcome to ReactJs tutorial.</h3>
-    </div>
-  );
-}
-
-export default App;`}
-                        />
-                        <li>
-                            The huge benefit of components is their ability to
-                            be reused across our apps, wherever we need them.
-                        </li>
-                        <li>
-                            Since components leverage the power of JavaScript
-                            functions, we can logically pass data to them, like
-                            we would by passing it one or more arguments.
-                        </li>
+                        <h2>Welcome to React tutorial</h2>
+                        <p>
+                            React is a Javascript library for building user
+                            interfaces.
+                        </p>
+                        <h3>Benefits of using React Js.</h3>
+                        <ul>
+                            <li>PWA</li>
+                            <li>SPA</li>
+                            <li>Easy state management.</li>
+                            <li>Easy component management.</li>
+                            <li>
+                                Learn once, write anywhere. We can use React Js
+                                over many popular frameworks like Ionic,
+                                Next.js, Gastby.js and many more.
+                            </li>
+                        </ul>
                     </div>
                 </main>
             </div>
         </>
     );
 }
-
-export default functional_components;

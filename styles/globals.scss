@@ -1,7 +1,9 @@
 @import "./variables";
-body{
+body,
+html {
     background: var(--bkground-color);
     color: var(--color);
+    overflow-x: hidden;
 }
 * {
     box-sizing: border-box;
@@ -11,6 +13,8 @@ body{
         Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     scroll-behavior: smooth;
 }
+$mobWidth: 520px;
+$tabWidth: 720px;
 @mixin flex-center($dir: row, $justifyContent: center, $alignItems: center) {
     display: flex;
     flex-direction: $dir;
@@ -24,14 +28,17 @@ body{
     -webkit-box-orient: vertical;
     -webkit-line-clamp: $lines;
 }
-.fav_btn{
-    color: map-get($map: $colors, $key: favourite) !important
+.fav_btn {
+    color: map-get($map: $colors, $key: favourite) !important;
 }
 @import "../components/layout";
+@import "../components/Loader/loader";
 @import "../components/Header/_header.scss";
-@import "./pages/index";
+@import "../pages/index";
 @import "../components/TrendingCard/trendingCard";
 @import "../components/BlogCard/blogCard";
-@import "./pages/react/index";
+@import "../pages/tutorials/react/index";
 @import "../components/SideMenu/sideMenu";
 @import "../components/CodeMaker/codemaker";
+@import "../pages/blogs/blogview";
+@import "../pages/login/login";

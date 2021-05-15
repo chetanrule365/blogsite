@@ -2,12 +2,26 @@ import { IconButton } from "@material-ui/core";
 import { FavoriteBorderRounded, MoreHorizRounded } from "@material-ui/icons";
 import Link from "next/link";
 import moment from "moment";
-export default function BlogCard({ blog }: any) {
-    const { title, desc, timestamp, createdBy, thumbnail } = blog.data();
+interface tutorialCardProps {
+    title: String;
+    desc: String;
+    timestamp: any;
+    user: String;
+    thumbnail: String;
+    url: string;
+}
+export default function TutorialCard({
+    title,
+    desc,
+    timestamp,
+    user,
+    thumbnail,
+    url,
+}: tutorialCardProps) {
     return (
-        <div className='blog-card' key={blog.id}>
+        <div className='blog-card'>
             <div className='info'>
-                <Link href={`/blogs/${blog.id}`}>
+                <Link href={`${url}`}>
                     <div className='details'>
                         <div className='title'>{title}</div>
                         <div className='desc'>{desc}</div>
@@ -15,7 +29,7 @@ export default function BlogCard({ blog }: any) {
                 </Link>
                 <div className='bottom'>
                     <div className='timestamp'>
-                        {moment(timestamp).format("ll")}. By {createdBy}
+                        {moment(timestamp).format("ll")}. By {user}
                     </div>
                     <div className='right'>
                         <IconButton className='fav_btn'>
@@ -24,7 +38,7 @@ export default function BlogCard({ blog }: any) {
                     </div>
                 </div>
             </div>
-            <Link href={`/blogs/${blog.id}`}>
+            <Link href={`${url}`}>
                 <div className='thumbnail'>
                     <img src={`${thumbnail}`} alt='thumbnail' />
                 </div>

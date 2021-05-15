@@ -1,12 +1,13 @@
+import Link from "next/link";
 import { CloseRounded, Menu } from "@material-ui/icons";
 import Head from "next/head";
-import SideMenu from "../../components/SideMenu/SideMenu";
-import { react_sidemenu_data } from "../../components/SideMenu/sideMenu_data";
-import { useEffect } from "react";
-import { closeMenu, openMenu } from "../../Animations/MenuToggle";
-import Link from "next/link";
-import CodeMaker from "../../components/CodeMaker/CodeMaker";
-export default function styling_in_react() {
+import React, { useEffect } from "react";
+import { closeMenu, openMenu } from "../../../Animations/MenuToggle";
+import SideMenu from "../../../components/SideMenu/SideMenu";
+import { react_sidemenu_data } from "../../../components/SideMenu/sideMenu_data";
+import CodeMaker from "../../../components/CodeMaker/CodeMaker";
+import Header from "../../../components/Header/Header";
+function functional_components() {
     let ele: HTMLElement | null;
     let menubtnEle_open: HTMLElement | null;
     useEffect(() => {
@@ -24,13 +25,14 @@ export default function styling_in_react() {
     return (
         <>
             <Head>
-                <title>Styling in React.js</title>
+                <title>Functional components in React.js</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
+            <Header switchURL='' />
             <div id='react'>
                 <div id='sidemenu'>
                     <header>
-                        <Link href='/react'>
+                        <Link href='/tutorials/react'>
                             <p>React Tutorial</p>
                         </Link>
                         <div
@@ -41,7 +43,7 @@ export default function styling_in_react() {
                             <CloseRounded className='btn' />
                         </div>
                     </header>
-                    <SideMenu data={react_sidemenu_data} activeEle={4} />
+                    <SideMenu data={react_sidemenu_data} activeEle={5} />
                 </div>
                 <main>
                     <div
@@ -56,46 +58,42 @@ export default function styling_in_react() {
                         <Menu className='btn' />
                     </div>
                     <div className='content'>
-                        <h3>Styling in React.js</h3>
-
+                        <h3>Functional Components in ReactJs</h3>
                         <li>
-                            Inline styles can be added to JSX elements using the
-                            style attribute.
+                            JSX can be grouped together within individual
+                            functions called components.
                         </li>
                         <li>
-                            Styles are updated within an object, not a set of
-                            double quotes, as with HTML.
-                        </li>
-                        <li>
-                            Note that style property names must be also written
-                            in camelcase.
-                        </li>
-
-                        <CodeMaker
-                            code={`<h1 style={{ color: "blue", fontSize: 22, padding: "0.5em 1em" }}>
-    Hello React!
-</h1>`}
-                        />
-                        <li>
-                            Also like classic way we can add external .css file
-                            to our component.
+                            Functional Component names are capitalized to
+                            distinguish them from plain JavaScript functions
+                            that do not return JSX.
                         </li>
                         <CodeMaker
-                            code={`import './App.css';
-
-function App() {
+                            code={`function App() {
   return (
     <div className="App">
       <h1>Hello world!</h1>
+      <h3>Welcome to ReactJs tutorial.</h3>
     </div>
   );
 }
 
 export default App;`}
                         />
+                        <li>
+                            The huge benefit of components is their ability to
+                            be reused across our apps, wherever we need them.
+                        </li>
+                        <li>
+                            Since components leverage the power of JavaScript
+                            functions, we can logically pass data to them, like
+                            we would by passing it one or more arguments.
+                        </li>
                     </div>
                 </main>
             </div>
         </>
     );
 }
+
+export default functional_components;

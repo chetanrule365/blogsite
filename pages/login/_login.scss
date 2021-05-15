@@ -1,0 +1,60 @@
+.login_con {
+    @include flex-center(column, center, center);
+    .login,
+    .signup {
+        width: $mobWidth;
+        @media screen and (max-width: $mobWidth) {
+            width: 100%;
+        }
+        @include flex-center(column, center, center);
+        p {
+            margin: 20px;
+            font-size: 14px;
+        }
+        p.title {
+            font-size: 24px;
+        }
+        .butts {
+            @include flex-center(row, flex-start, center);
+            color: black;
+            border: 2px solid black;
+            border-radius: 3px;
+            height: 40px;
+            width: 260px;
+            padding: 0 20px;
+            margin: 10px;
+            img {
+                height: 25px;
+                margin-right: 10px;
+            }
+        }
+        form {
+            @include flex-center(column, center, center);
+            width: 100%;
+            padding: 0 22px;
+            input {
+                outline: none;
+                border: 1.5px solid rgb(105, 105, 105);
+                border-radius: 3px;
+                height: 40px;
+                margin: 8px;
+                width: 100%;
+                color: black;
+                padding: 0 8px;
+            }
+            .button {
+                background: rgb(235, 48, 110);
+                color: white;
+                margin-top: 16px;
+            }
+        }
+        .toggle_sec {
+            width: 100%;
+            @include flex-center(row, center, center);
+            .button {
+                color: rgb(157, 26, 245);
+                // color: white;
+            }
+        }
+    }
+}

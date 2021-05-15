@@ -1,0 +1,10 @@
+.loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    @include flex-center(column, center, center);
+    z-index: 10;
+}

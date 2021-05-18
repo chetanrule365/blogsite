@@ -3,87 +3,77 @@ import Head from "next/head";
 import SideMenu from "../../../components/SideMenu/SideMenu";
 import { react_sidemenu_data } from "../../../components/SideMenu/sideMenu_data";
 import { useEffect } from "react";
-import { closeMenu, openMenu } from "../../../Animations/MenuToggle";
 import Link from "next/link";
 import CodeMaker from "../../../components/CodeMaker/CodeMaker";
 import Header from "../../../components/Header/Header";
 export default function styling_in_react() {
-    let ele: HTMLElement | null;
-    let menubtnEle_open: HTMLElement | null;
+    let sidemenu: HTMLElement | null;
+    let mainContent: HTMLElement | null;
+    const toggleMenu = () => {
+        sidemenu?.classList.toggle("hide");
+        mainContent?.classList.toggle("extend");
+    };
     useEffect(() => {
-        ele = document.getElementById("sidemenu");
-        menubtnEle_open = document.getElementById("menubtn-open");
-        openMenu(ele, window.innerWidth <= 750, menubtnEle_open);
+        sidemenu = document.getElementById("side-menu");
+        mainContent = document.getElementById("main-content");
         setTimeout(() => {
-            if (window.innerWidth <= 750) closeMenu(ele, menubtnEle_open);
+            if (window.innerWidth <= 750) toggleMenu();
         }, 700);
-        window.addEventListener("resize", () => {
-            if (window.innerWidth <= 750)
-                if (ele) ele.style.width = `${window.innerWidth}px`;
-        });
-    });
+    }, []);
     return (
         <>
             <Head>
                 <title>Styling in React.js</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
-            <Header switchURL='' />
-            <div id='react'>
-                <div id='sidemenu'>
-                    <header>
-                        <Link href='/tutorials/react'>
-                            <p>React Tutorial</p>
-                        </Link>
-                        <div
-                            id='menubtn'
-                            onClick={() => {
-                                closeMenu(ele, menubtnEle_open);
-                            }}>
-                            <CloseRounded className='btn' />
-                        </div>
-                    </header>
-                    <SideMenu data={react_sidemenu_data} activeEle={4} />
-                </div>
-                <main>
-                    <div
-                        id='menubtn-open'
-                        onClick={() => {
-                            openMenu(
-                                ele,
-                                window.innerWidth <= 750,
-                                menubtnEle_open,
-                            );
-                        }}>
-                        <Menu className='btn' />
+            <div className='tutorial-content'>
+                <Header switchURL='' />
+                <div className='content-con'>
+                    <div id='side-menu'>
+                        <div className='bg-dup'></div>
+                        <header>
+                            <Link href='/tutorials/react'>
+                                <p>React Tutorial</p>
+                            </Link>
+                            <div
+                                id='menubtn-close'
+                                onClick={() => toggleMenu()}>
+                                <CloseRounded className='btn' />
+                            </div>
+                        </header>
+                        <SideMenu data={react_sidemenu_data} activeEle={4} />
                     </div>
-                    <div className='content'>
-                        <h3>Styling in React.js</h3>
+                    <main id='main-content'>
+                        <div id='menubtn-open' onClick={() => toggleMenu()}>
+                            <Menu className='btn' />
+                        </div>
+                        <div className='content'>
+                            <h3>Styling in React.js</h3>
 
-                        <li>
-                            Inline styles can be added to JSX elements using the
-                            style attribute.
-                        </li>
-                        <li>
-                            Styles are updated within an object, not a set of
-                            double quotes, as with HTML.
-                        </li>
-                        <li>
-                            Note that style property names must be also written
-                            in camelcase.
-                        </li>
+                            <li>
+                                Inline styles can be added to JSX elements using
+                                the style attribute.
+                            </li>
+                            <li>
+                                Styles are updated within an object, not a set
+                                of double quotes, as with HTML.
+                            </li>
+                            <li>
+                                Note that style property names must be also
+                                written in camelcase.
+                            </li>
 
-                        <CodeMaker
-                            code={`<h1 style={{ color: "blue", fontSize: 22, padding: "0.5em 1em" }}>
+                            <CodeMaker
+                                code={`<h1 style={{ color: "blue", fontSize: 22, padding: "0.5em 1em" }}>
     Hello React!
 </h1>`}
-                        />
-                        <li>
-                            Also like classic way we can add external .css file
-                            to our component.
-                        </li>
-                        <CodeMaker
-                            code={`import './App.css';
+                            />
+                            <li>
+                                Also like classic way we can add external .css
+                                file to our component.
+                            </li>
+                            <CodeMaker
+                                code={`import './App.css';
 
 function App() {
   return (
@@ -94,9 +84,10 @@ function App() {
 }
 
 export default App;`}
-                        />
-                    </div>
-                </main>
+                            />
+                        </div>
+                    </main>
+                </div>
             </div>
         </>
     );

@@ -12,19 +12,6 @@
             );
         }
     }
-    .signin_butt {
-        background: rgba(
-            $color: map-get($map: $colors, $key: secondary),
-            $alpha: 1
-        );
-        border: 2px solid black;
-        &:hover {
-            background: rgba(
-                $color: map-get($map: $colors, $key: secondary),
-                $alpha: 0.8
-            );
-        }
-    }
     .main-header {
         @include flex-center(row, space-between, center);
         box-shadow: 0px 2px 3px var(--shadow-color);
@@ -55,8 +42,15 @@
                 transform-origin: center;
                 transform: rotate(90deg);
             }
-            p {
+            .greet {
                 font-weight: 600;
+                white-space: nowrap;
+            }
+            @media screen and (max-width: $mob-width) {
+                & > hr,
+                .greet {
+                    display: none;
+                }
             }
         }
         .menuButt {
@@ -75,6 +69,7 @@
                 padding: 6px 12px;
                 width: 50%;
                 background: white;
+                margin-right: 16px;
                 input {
                     width: 100%;
                     border: none;
@@ -85,12 +80,15 @@
                 color: white;
                 margin-left: 16px;
             }
-            .avatar {
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                object-fit: cover;
+            @media screen and (max-width: $tab-width) {
+                display: none;
             }
+        }
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
         }
     }
     #sidemenu {
@@ -102,12 +100,13 @@
         transform: translateX(-100%);
         transition: 0.3s;
         padding: 16px;
-        width: 500px;
-        @media screen and (max-width: 500px) {
+        width: 400px;
+        @media screen and (max-width: 400px) {
             width: 100%;
         }
-        background: blueviolet;
-        @include flex-center(column, space-between, center);
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
         header {
             width: 100%;
             @include flex-center(row, space-between, center);
@@ -116,10 +115,23 @@
             }
             .back {
                 transition: 0.3s;
-                color: white;
                 svg {
                     font-size: 32px;
                 }
+            }
+        }
+        .profile {
+            margin: 16px 0;
+            width: 100%;
+            @include flex-center(column, center, center);
+            .avatar {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            Button {
+                color: map-get($map: $colors, $key: primary);
             }
         }
         .tabs {
@@ -128,6 +140,35 @@
             Button {
                 width: 70%;
                 margin: 16px 0;
+                position: relative;
+                transition: 0.3s;
+                background: map-get($map: $colors, $key: primary);
+                padding: 8px;
+                text-transform: capitalize;
+                border-radius: 5px;
+                p {
+                    z-index: 1;
+                }
+                &::after {
+                    transition: 0.3s;
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 0%;
+                    height: 100%;
+                    border-radius: 5px;
+                    background: map-get($map: $colors, $key: favourite);
+                }
+                &:hover {
+                    background: map-get($map: $colors, $key: primary);
+                    &::after {
+                        width: 100%;
+                    }
+                }
+            }
+            Button.signin_butt {
+                background: map-get($map: $colors, $key: secondary);
             }
         }
         &.show {

@@ -29,6 +29,15 @@
                 font-size: 10px;
                 font-weight: 500;
             }
+            .right {
+                @include flex-center(row);
+                .edit-btn {
+                    color: map-get($map: $colors, $key: favourite);
+                    svg {
+                        font-size: 20px;
+                    }
+                }
+            }
         }
     }
     .thumbnail {
@@ -46,6 +55,22 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
+        }
+    }
+}
+.pop-content {
+    @include flex-center(column, center, center);
+    padding: 8px 4px;
+    Button {
+        text-transform: capitalize;
+        p {
+            margin-left: 8px;
+        }
+        &.share {
+            color: map-get($map: $colors, $key: primary);
+        }
+        &.delete {
+            color: grey;
         }
     }
 }

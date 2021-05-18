@@ -1,8 +1,8 @@
 @import "./variables";
 body,
 html {
-    background: var(--bkground-color);
-    color: var(--color);
+    // background: var(--bkground-color);
+    // color: var(--color);
     overflow-x: hidden;
 }
 * {
@@ -16,10 +16,10 @@ html {
 $mobWidth: 520px;
 $tabWidth: 720px;
 @mixin flex-center($dir: row, $justifyContent: center, $alignItems: center) {
-    display: flex;
-    flex-direction: $dir;
-    justify-content: $justifyContent;
-    align-items: $alignItems;
+    display: flex !important;
+    flex-direction: $dir !important;
+    justify-content: $justifyContent !important;
+    align-items: $alignItems !important;
 }
 @mixin wrap_to_lines($lines: 1) {
     overflow: hidden;
@@ -31,6 +31,10 @@ $tabWidth: 720px;
 .fav_btn {
     color: map-get($map: $colors, $key: favourite) !important;
 }
+.delete-btn {
+    color: red !important;
+}
+
 @import "../components/layout";
 @import "../components/Loader/loader";
 @import "../components/Header/_header.scss";
@@ -42,3 +46,7 @@ $tabWidth: 720px;
 @import "../components/CodeMaker/codemaker";
 @import "../pages/blogs/blogview";
 @import "../pages/login/login";
+@import "../pages/publish/publish";
+@import "../pages/myfavourites/myFavourites";
+@import "../components/Footer/footer";
+@import "../pages/profile/profile";

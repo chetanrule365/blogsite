@@ -24,6 +24,9 @@
                 font-size: 10px;
                 font-weight: 500;
             }
+            .right {
+                @include flex-center(row);
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ import {
 } from "../../services/Auth";
 import firebase from "firebase";
 import Link from "next/link";
+import SimpleHeader from "../../components/Header/SimpleHeader";
 
 function Login() {
     const [loginType, setLoginType] = useState("login");
@@ -27,6 +28,7 @@ function Login() {
     }, []);
     return (
         <>
+            <SimpleHeader />
             <Link href='/'>
                 <IconButton className='icon_butt' slot='start'>
                     <ArrowBackRounded />
@@ -53,7 +55,12 @@ function Login() {
                     <p style={{ fontSize: "28px" }}>OR</p>
                     <form action=''>
                         {loginType === "signup" && (
-                            <input type='text' placeholder='username' />
+                            <input
+                                type='text'
+                                placeholder='username'
+                                value={name}
+                                onChange={(e) => setname(e.target.value)}
+                            />
                         )}
                         <input
                             type='email'

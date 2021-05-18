@@ -1,20 +1,39 @@
 .home {
     padding: 32px 100px;
-    padding-top: 132px;
+    padding-top: 104px;
     @media screen and (max-width: $tab-end-width) {
         padding: 32px;
-        padding-top: 132px;
+        padding-top: 104px;
     }
     @media screen and (max-width: $mob-width) {
         padding: 16px;
-        padding-top: 116px;
+        padding-top: 96px;
+    }
+    width: 100%;
+    .search-btn {
+        display: none;
+        @media screen and (max-width: $tab-width) {
+            display: block;
+            border: 2px solid map-get($map: $colors, $key: primary);
+            border-radius: 5px;
+            @include flex-center(row, center, center);
+            padding: 6px 12px;
+            background: white;
+            width: 100%;
+            margin-bottom: 16px;
+            input {
+                width: 100%;
+                border: none;
+                outline: none;
+            }
+        }
     }
     .headline {
         @include flex-center(row, flex-start, center);
         p {
             margin-left: 8px;
         }
-        margin-bottom: 8px;
+        margin-bottom: 16px;
     }
     .trending-cards {
         display: grid;
@@ -31,15 +50,39 @@
         }
         margin-bottom: 50px;
     }
-    .blog-cards {
-        padding-top: 40px;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-column-gap: 70px;
-        grid-row-gap: 20px;
-        @media screen and (min-width: $tab-end-width) {
-            grid-template-columns: 1fr 1fr;
+    .content {
+        @include flex-center(row, space-between, flex-start);
+        width: 100%;
+        .blog-cards {
+            width: 60%;
+            @media screen and (max-width: $tab-width) {
+                width: 100%;
+            }
+            padding-top: 40px;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-column-gap: 70px;
+            grid-row-gap: 20px;
+            // @media screen and (min-width: $tab-end-width) {
+            //     grid-template-columns: 1fr 1fr;
+            // }
+            border-top: 2px solid rgb(136, 136, 136);
         }
-        border-top: 2px solid rgb(136, 136, 136);
+        .videos {
+            margin-left: 16px;
+            width: 40%;
+            @media screen and (max-width: $tab-width) {
+                display: none;
+            }
+            @include flex-center(column, center, center);
+            h3 {
+                margin-bottom: 16px;
+            }
+            iframe {
+                width: 100%;
+                max-width: 400px;
+                height: 220px;
+            }
+        }
     }
 }

@@ -1,0 +1,77 @@
+.admin {
+    padding: 16px;
+    padding-top: 96px;
+    width: $tab-width;
+    @media screen and (max-width: $tab-width) {
+        width: 100%;
+    }
+    margin: auto;
+    .form {
+        width: 100%;
+        margin: auto;
+        @include flex-center(column, center, center);
+        p {
+            font-size: 24px;
+            text-align: left;
+            width: 100%;
+            margin: 8px 0;
+        }
+        input,
+        textarea {
+            outline: none;
+            border: 1.5px solid rgb(187, 187, 187);
+            width: 100%;
+            margin: 8px 0;
+            border-radius: 3px;
+            padding: 8px 16px;
+            background: rgb(235, 235, 235);
+            color: black;
+        }
+        .preview {
+            width: 100%;
+            img {
+                width: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+            margin-top: 16px;
+        }
+        .upload_butt {
+            @include flex-center(row, center, center);
+            background: rgba($color: #44a3f1, $alpha: 0.5);
+            padding: 8px 16px;
+            border: 2px dashed #44a3f1;
+            border-radius: 3px;
+            margin: 8px 0;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .category {
+            width: 100%;
+            .select {
+                width: 100%;
+            }
+        }
+        .switch {
+            margin-top: 24px;
+        }
+        .note {
+            font-size: 16px;
+            color: tomato;
+        }
+    }
+    .footer {
+        @include flex-center(row, center, center);
+        .publish {
+            padding: 16px;
+            background: map-get($map: $colors, $key: secondary);
+            color: cornsilk;
+            &:hover {
+                background: map-get($map: $colors, $key: secondary);
+                color: cornsilk;
+            }
+            margin: 16px 0;
+            width: 100%;
+        }
+    }
+}

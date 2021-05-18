@@ -1,5 +1,6 @@
 .login_con {
     @include flex-center(column, center, center);
+    margin-top: 80px;
     .login,
     .signup {
         width: $mobWidth;

@@ -13,6 +13,7 @@ import Loader from "../../components/Loader/Loader";
 import firebase from "firebase";
 import InitializefirebaseApp from "../../services/InitializefirebaseApp";
 import Link from "next/link";
+import SimpleHeader from "../../components/Header/SimpleHeader";
 InitializefirebaseApp();
 interface blogData {
     title: "title";
@@ -51,8 +52,9 @@ function blogspage() {
 
     return (
         <div className='blogview'>
+            <SimpleHeader />
             <Link href='/'>
-                <IconButton style={{ marginLeft: "-8px" }}>
+                <IconButton style={{ marginLeft: "-16px" }}>
                     <ArrowBackOutlined />
                 </IconButton>
             </Link>
@@ -88,6 +90,7 @@ function blogspage() {
                                 </IconButton>
                             </div>
                         </div>
+                        <hr />
                         <p id='inDetail' style={{ marginTop: "10px" }}></p>
                         <div id='thumbnail'>
                             <img src={blogData?.thumbnail} alt='' />

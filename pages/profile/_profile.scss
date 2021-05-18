@@ -1,0 +1,92 @@
+.profile-page {
+    width: $tab-width;
+    @media screen and (max-width: $tab-width) {
+        width: 100%;
+    }
+    margin: auto;
+    padding: 16px;
+    padding-top: 96px;
+    header {
+        @include flex-center(row, flex-start, center);
+        p {
+            font-size: 24px;
+            font-weight: 600;
+        }
+    }
+    .content {
+        width: 100%;
+        .name,
+        .photo,
+        .email {
+            width: 100%;
+            @include flex-center(row, space-between, flex-end);
+            margin-bottom: 50px;
+            div {
+                width: 80%;
+                margin-right: 16px;
+                p {
+                    font-size: 20px;
+                    margin: 16px 0;
+                }
+                input {
+                    width: 100%;
+                    background: none;
+                    border: none;
+                    outline: none;
+                    border-bottom: 1px solid black;
+                    color: black;
+                    padding: 8px 0;
+                }
+                div {
+                    width: 100%;
+                    @include flex-center(row, space-between, center);
+                    p {
+                        font-size: 12px !important;
+                        margin-right: 100px;
+                        @media screen and (max-width: $mob-width) {
+                            margin-right: 16px;
+                        }
+                    }
+                    .avatar {
+                        @include flex-center(row, center, center);
+                        width: 100px;
+                        height: 100px;
+                        @media screen and (max-width: $mob-width) {
+                            width: 80px;
+                            height: 80px;
+                        }
+                        object-fit: cover;
+                        object-position: center;
+                    }
+                }
+            }
+            .butts {
+                @include flex-center(column, center, center);
+                width: fit-content;
+                .edit_butt {
+                    width: 100%;
+                    background: rgb(184, 184, 184);
+                    margin-top: 10px;
+                    font-size: 10px;
+                    label {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .resetPass,
+        .deleteAccount {
+            .butt {
+                background: blueviolet;
+                color: white;
+                margin: 8px 0;
+            }
+        }
+        .deleteAccount {
+            margin: 16px 0;
+            .butt {
+                background: rgb(248, 51, 51);
+            }
+        }
+    }
+}

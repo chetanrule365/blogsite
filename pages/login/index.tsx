@@ -111,29 +111,30 @@ function Login() {
                                         setShowAlert(true);
                                     }
                                 } else if (loginType === "signup") {
-                                    if (name.trim().length >= 3) {
-                                        if (password === cPassword) {
-                                            signUpWithEmail(
-                                                name.trim(),
-                                                email.trim(),
-                                                password,
-                                                (e) => {
-                                                    setError(e.toString());
-                                                    setShowAlert(true);
-                                                    setLoading(false);
-                                                },
-                                            );
-                                        } else {
-                                            setError(
-                                                "Passwords do not match. Try again... ",
-                                            );
-                                            setShowAlert(true);
-                                        }
-                                    } else {
+                                    if (name.trim().length < 3) {
                                         setError(
-                                            "Username should be atleast 3 chars long.",
+                                            "Username should be atleast 3 chars long",
                                         );
                                         setShowAlert(true);
+                                    } else if (password.trim().length < 3) {
+                                        setError(
+                                            "Password should be atleast 3 chars long",
+                                        );
+                                        setShowAlert(true);
+                                    } else if (password !== cPassword) {
+                                        setError("Passwords do not match");
+                                        setShowAlert(true);
+                                    } else {
+                                        signUpWithEmail(
+                                            name.trim(),
+                                            email.trim(),
+                                            password,
+                                            (e) => {
+                                                setError(e.toString());
+                                                setShowAlert(true);
+                                                setLoading(false);
+                                            },
+                                        );
                                     }
                                 }
                             }}>

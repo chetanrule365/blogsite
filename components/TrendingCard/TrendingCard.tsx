@@ -7,32 +7,38 @@ import {
 } from "@material-ui/icons";
 import Link from "next/link";
 import { useState } from "react";
-interface trendingCardProps {
-    sno: String;
-    title: String;
-    timestamp: String;
-    user: String;
-    url: String;
-}
+import moment from "moment";
 export default function TrendingCard({
     sno,
-    title,
-    timestamp,
-    user,
-    url,
-}: trendingCardProps) {
+    blog,
+    manualData,
+}: {
+    sno?: string;
+    blog?: any;
+    manualData?: {
+        sno: string;
+        title: string;
+        timestamp: string;
+        createdBy: string;
+        url: string;
+    };
+}) {
+    const { title, desc, timestamp, createdBy, thumbnail, url } = blog
+        ? blog.data()
+        : manualData;
     const [isFav, setisFav] = useState(false);
     return (
         <div className='trending-card'>
-            <div className='id'>{sno}</div>
+            <div className='id'>{sno ? sno : manualData?.sno}</div>
             <div className='info'>
-                <Link href={`${url}`}>
+                <Link href={blog ? `/blogs/${blog.id}` : url}>
                     <div className='title'>{title}</div>
                 </Link>
                 <div className='bottom'>
-                    <Link href={`${url}`}>
+                    <Link href={blog ? `/blogs/${blog.id}` : url}>
                         <div className='timestamp'>
-                            {timestamp}. By {user}
+                            {blog ? moment(timestamp).format("ll") : timestamp}.
+                            By {createdBy}
                         </div>
                     </Link>
                     <div className='right'>

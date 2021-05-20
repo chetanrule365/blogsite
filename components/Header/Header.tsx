@@ -1,5 +1,15 @@
 import { Avatar, Button, IconButton } from "@material-ui/core";
-import { CloseRounded, Menu, Search } from "@material-ui/icons";
+import {
+    ArrowForward,
+    Book,
+    CloseRounded,
+    ExitToApp,
+    FavoriteRounded,
+    LibraryBooks,
+    Menu,
+    Publish,
+    Search,
+} from "@material-ui/icons";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import firebase from "firebase";
@@ -35,57 +45,66 @@ export default function Header({ switchURL }: header) {
                         {firebase.auth().currentUser?.displayName}
                     </p>
                 </div>
-
-                <div id='right'>
-                    <div className='search'>
-                        <input type='text' placeholder='Search' />
-                        <Search />
-                    </div>
-                    {/* <Link href='/aboutus'>
+                <div className='right-con'>
+                    <div id='right'>
+                        <div className='search'>
+                            <input type='text' placeholder='Search' />
+                            <Search />
+                        </div>
+                        {/* <Link href='/aboutus'>
                                 <Button>About Us</Button>
                             </Link> */}
-                    {switchURL ? (
-                        <Link href={switchURL}>
-                            <Button className='switch'>Switch to {text}</Button>
+                        {switchURL ? (
+                            <Link href={switchURL}>
+                                <Button className='switch'>
+                                    Switch to {text}
+                                </Button>
+                            </Link>
+                        ) : (
+                            <>
+                                <Link href='/tutorials'>
+                                    <Button>
+                                        <p>Tutorials</p>
+                                    </Button>
+                                </Link>
+                                <Link href='/'>
+                                    <Button>
+                                        <p>Blogs</p>
+                                    </Button>
+                                </Link>
+                            </>
+                        )}
+                    </div>
+                    {!user ? (
+                        <Link href='/login'>
+                            <Button className='signin_butt'>Log&nbsp;In</Button>
                         </Link>
                     ) : (
                         <>
-                            <Link href='/tutorials'>
-                                <Button>Tutorials</Button>
-                            </Link>
-                            <Link href='/'>
-                                <Button>Blogs</Button>
-                            </Link>
+                            <IconButton
+                                onClick={() => {
+                                    const ele =
+                                        document.getElementById("sidemenu");
+                                    if (ele) {
+                                        ele.classList.toggle("show");
+                                    }
+                                }}>
+                                {firebase.auth().currentUser?.photoURL ? (
+                                    <img
+                                        className='avatar'
+                                        src={`${
+                                            firebase.auth().currentUser
+                                                ?.photoURL
+                                        }`}
+                                        alt=''
+                                    />
+                                ) : (
+                                    <Avatar />
+                                )}
+                            </IconButton>
                         </>
                     )}
                 </div>
-                {!user ? (
-                    <Link href='/login'>
-                        <Button className='signin_butt'>Log In</Button>
-                    </Link>
-                ) : (
-                    <>
-                        <IconButton
-                            onClick={() => {
-                                const ele = document.getElementById("sidemenu");
-                                if (ele) {
-                                    ele.classList.toggle("show");
-                                }
-                            }}>
-                            {firebase.auth().currentUser?.photoURL ? (
-                                <img
-                                    className='avatar'
-                                    src={`${
-                                        firebase.auth().currentUser?.photoURL
-                                    }`}
-                                    alt=''
-                                />
-                            ) : (
-                                <Avatar />
-                            )}
-                        </IconButton>
-                    </>
-                )}
             </div>
 
             <div id='sidemenu'>
@@ -103,45 +122,57 @@ export default function Header({ switchURL }: header) {
                     </IconButton>
                 </header>
                 {user && (
-                    <div className='profile'>
-                        <IconButton>
-                            {firebase.auth().currentUser?.photoURL ? (
-                                <img
-                                    className='avatar'
-                                    src={`${
-                                        firebase.auth().currentUser?.photoURL
-                                    }`}
-                                    alt=''
-                                />
-                            ) : (
-                                <Avatar
-                                    style={{ width: "80px", height: "80px" }}
-                                />
-                            )}
-                        </IconButton>
-                        <Link href='/profile'>
-                            <Button>Profile</Button>
-                        </Link>
-                    </div>
+                    <Link href='/profile'>
+                        <div className='profile'>
+                            <div className='info'>
+                                <IconButton>
+                                    {firebase.auth().currentUser?.photoURL ? (
+                                        <img
+                                            className='avatar'
+                                            src={`${
+                                                firebase.auth().currentUser
+                                                    ?.photoURL
+                                            }`}
+                                            alt=''
+                                        />
+                                    ) : (
+                                        <Avatar className='avatar' />
+                                    )}
+                                </IconButton>
+                                <div className='name'>
+                                    {firebase.auth().currentUser?.displayName}
+                                </div>
+                            </div>
+                            <IconButton>
+                                <ArrowForward />
+                            </IconButton>
+                        </div>
+                    </Link>
                 )}
                 <div className='tabs'>
                     {switchURL ? (
                         <Link href={switchURL}>
-                            <Button>
+                            <Button className='switch'>
                                 <p>Switch to {text}</p>
                             </Button>
                         </Link>
                     ) : (
                         <>
                             <Link href='/tutorials'>
-                                <Button>
+                                <div className='tab-btn'>
+                                    <IconButton>
+                                        <LibraryBooks />
+                                    </IconButton>
                                     <p>Tutorials</p>
-                                </Button>
+                                </div>
                             </Link>
                             <Link href='/'>
-                                <Button>
+                                <div className='tab-btn'>
+                                    <IconButton>
+                                        <LibraryBooks />
+                                    </IconButton>
                                     <p>Blogs</p>
-                                </Button>
+                                </div>
                             </Link>
                         </>
                     )}
@@ -157,28 +188,40 @@ export default function Header({ switchURL }: header) {
                     ) : (
                         <>
                             <Link href='/myblogs'>
-                                <Button>
+                                <div className='tab-btn'>
+                                    <IconButton>
+                                        <LibraryBooks />
+                                    </IconButton>
                                     <p>My Blogs</p>
-                                </Button>
+                                </div>
                             </Link>
                             <Link href='/myfavourites'>
-                                <Button>
+                                <div className='tab-btn'>
+                                    <IconButton>
+                                        <FavoriteRounded />
+                                    </IconButton>
                                     <p>My Favourites</p>
-                                </Button>
+                                </div>
                             </Link>
                             <Link href='/publish'>
-                                <Button>
+                                <div className='tab-btn'>
+                                    <IconButton>
+                                        <Publish />
+                                    </IconButton>
                                     <p>Publish Blog</p>
-                                </Button>
+                                </div>
                             </Link>
-                            <Button
-                                className='signin_butt'
+                            <div
+                                className='tab-btn'
                                 onClick={() => {
                                     localStorage.clear();
                                     firebase.auth().signOut();
                                 }}>
+                                <IconButton>
+                                    <ExitToApp />
+                                </IconButton>
                                 <p>Log Out</p>
-                            </Button>
+                            </div>
                         </>
                     )}
                 </div>

@@ -33,7 +33,21 @@
             height: 100%;
         }
     }
-    code {
-        white-space: pre-wrap !important;
+    .code-con {
+        background: rgb(40, 40, 40);
+        margin: 32px 0;
+        border-radius: 8px;
+        overflow: hidden;
+        .segment {
+            background: rgb(233, 233, 233);
+            Button {
+                padding: 8px;
+                &.active {
+                    background: rgb(40, 40, 40);
+                    color: map-get($map: $colors, $key: favourite);
+                    border-radius: 0px;
+                }
+            }
+        }
     }
 }

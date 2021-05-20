@@ -15,6 +15,7 @@
         .title {
             font-weight: 700;
             font-size: 20px;
+            @include wrap_to_lines();
         }
         .bottom {
             width: 100%;

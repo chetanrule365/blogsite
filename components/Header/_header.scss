@@ -59,36 +59,46 @@
                 color: white;
             }
         }
-        #right {
+        .right-con {
             @include flex-center(row, flex-end, center);
             width: 70%;
-            .search {
-                border: 2px solid map-get($map: $colors, $key: primary);
-                border-radius: 5px;
-                @include flex-center(row, center, center);
-                padding: 6px 12px;
-                width: 50%;
-                background: white;
-                margin-right: 16px;
-                input {
-                    width: 100%;
-                    border: none;
-                    outline: none;
+            #right {
+                width: 100%;
+                @include flex-center(row, flex-end, center);
+                .search {
+                    border: 2px solid map-get($map: $colors, $key: primary);
+                    border-radius: 5px;
+                    @include flex-center(row, center, center);
+                    padding: 6px 12px;
+                    width: 50%;
+                    background: white;
+                    margin-right: 16px;
+                    input {
+                        width: 100%;
+                        border: none;
+                        outline: none;
+                    }
+                }
+                @media screen and (max-width: $tab-width) {
+                    display: none;
+                    visibility: hidden;
+                }
+                Button {
+                    margin-left: 8px;
                 }
             }
-            Button {
-                color: white;
+            .avatar {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            .signin_butt {
+                background: map-get($map: $colors, $key: secondary);
+                padding: 8px 16px;
                 margin-left: 16px;
+                border: 2px solid black;
             }
-            @media screen and (max-width: $tab-width) {
-                display: none;
-            }
-        }
-        .avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
         }
     }
     #sidemenu {
@@ -104,31 +114,40 @@
         @media screen and (max-width: 400px) {
             width: 100%;
         }
-        background: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+        background: rgb(41, 41, 41);
+        color: white;
+        // backdrop-filter: blur(8px);
+        // -webkit-backdrop-filter: blur(8px);
         header {
             width: 100%;
             @include flex-center(row, space-between, center);
             img {
                 width: 150px;
+                filter: invert(1);
             }
             .back {
                 transition: 0.3s;
                 svg {
                     font-size: 32px;
+                    color: map-get($map: $colors, $key: secondary);
                 }
             }
         }
         .profile {
-            margin: 16px 0;
+            margin: 32px 0 0 0;
             width: 100%;
-            @include flex-center(column, center, center);
-            .avatar {
-                width: 100px;
-                height: 100px;
-                border-radius: 50%;
-                object-fit: cover;
+            @include flex-center(row, space-between, center);
+            background: rgb(59, 59, 59);
+            cursor: pointer;
+            border-radius: 5px;
+            .info {
+                @include flex-center(row, center, center);
+                .avatar {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
             }
             Button {
                 color: map-get($map: $colors, $key: primary);
@@ -136,39 +155,35 @@
         }
         .tabs {
             width: 100%;
-            @include flex-center(column, center, center);
-            Button {
-                width: 70%;
-                margin: 16px 0;
-                position: relative;
-                transition: 0.3s;
+            .switch {
                 background: map-get($map: $colors, $key: primary);
-                padding: 8px;
-                text-transform: capitalize;
+                width: 100%;
+                margin: 32px 0 0 0;
+            }
+            .tab-btn {
+                @include flex-center(row, flex-start, center);
+                transition: 0.3s;
                 border-radius: 5px;
-                p {
-                    z-index: 1;
+                margin-top: 6px;
+                cursor: pointer;
+                Button {
+                    color: map-get($map: $colors, $key: primary);
                 }
-                &::after {
-                    transition: 0.3s;
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 0%;
-                    height: 100%;
-                    border-radius: 5px;
-                    background: map-get($map: $colors, $key: favourite);
+                p {
+                    font-weight: 600;
+                    letter-spacing: 1.2px;
                 }
                 &:hover {
-                    background: map-get($map: $colors, $key: primary);
-                    &::after {
-                        width: 100%;
-                    }
+                    background: map-get($map: $colors, $key: secondary);
+                    color: black;
                 }
             }
-            Button.signin_butt {
-                background: map-get($map: $colors, $key: secondary);
+            .signin_butt {
+                border: 2px solid map-get($map: $colors, $key: secondary);
+                color: map-get($map: $colors, $key: secondary);
+                width: 100%;
+                font-size: 16px;
+                margin-top: 32px;
             }
         }
         &.show {

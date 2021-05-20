@@ -9,6 +9,7 @@ import {
 import firebase from "firebase";
 import Link from "next/link";
 import SimpleHeader from "../../components/Header/SimpleHeader";
+import AlertBox from "../../components/AlertBox/AlertBox";
 
 function Login() {
     const [loginType, setLoginType] = useState("login");
@@ -36,8 +37,14 @@ function Login() {
             </Link>
 
             <div className='login_con'>
+                {showAlert && (
+                    <AlertBox
+                        message={error}
+                        onClose={() => setShowAlert(false)}
+                    />
+                )}
                 <div className='login'>
-                    <p className='title'>Join FEW.com</p>
+                    <p className='title'>Join TechBlog.com</p>
                     <Button
                         className='butts'
                         onClick={() =>
@@ -87,15 +94,22 @@ function Login() {
                             onClick={() => {
                                 setLoading(true);
                                 if (loginType === "login") {
-                                    signInWithEmail(
-                                        email,
-                                        password,
-                                        (e: any) => {
-                                            setError(e);
-                                            setShowAlert(true);
-                                            setLoading(false);
-                                        },
-                                    );
+                                    if (email)
+                                        signInWithEmail(
+                                            email,
+                                            password,
+                                            (e: any) => {
+                                                setError(e.toString());
+                                                setShowAlert(true);
+                                                setLoading(false);
+                                            },
+                                        );
+                                    else {
+                                        setError(
+                                            "Please enter your Email Address",
+                                        );
+                                        setShowAlert(true);
+                                    }
                                 } else if (loginType === "signup") {
                                     if (name.trim().length >= 3) {
                                         if (password === cPassword) {
@@ -104,7 +118,7 @@ function Login() {
                                                 email.trim(),
                                                 password,
                                                 (e) => {
-                                                    setError(e);
+                                                    setError(e.toString());
                                                     setShowAlert(true);
                                                     setLoading(false);
                                                 },
@@ -117,12 +131,11 @@ function Login() {
                                         }
                                     } else {
                                         setError(
-                                            "Username should contain atleast 3 chars.",
+                                            "Username should be atleast 3 chars long.",
                                         );
                                         setShowAlert(true);
                                     }
                                 }
-                                setLoading(false);
                             }}>
                             {loginType === "login" ? "Sign In" : "Sign Up"}
                         </Button>

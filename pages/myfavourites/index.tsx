@@ -23,6 +23,7 @@ function MyFavourites() {
             .firestore()
             .collection("frontEndBlogs")
             .limit(5)
+            .orderBy("timestamp", "desc")
             .get()
             .then((res) => {
                 setMyFavBlogs(res.docs.map((doc) => doc));

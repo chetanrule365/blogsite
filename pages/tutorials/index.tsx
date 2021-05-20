@@ -18,25 +18,31 @@ export default function Tutorialspage() {
                 </div>
                 <div className='trending-cards'>
                     <TrendingCard
-                        sno='01'
-                        title='ReactJs Tutorial'
-                        timestamp='May 3, 2021'
-                        user='chetan'
-                        url='/tutorials/react'
+                        manualData={{
+                            sno: "01",
+                            title: "ReactJs Tutorial",
+                            timestamp: "May 3, 2021",
+                            createdBy: "chetan",
+                            url: "/tutorials/react",
+                        }}
                     />
                     <TrendingCard
-                        sno='02'
-                        title='NextJs Tutorial'
-                        timestamp='Feb 20, 2021'
-                        user='chetan'
-                        url='/tutorials'
+                        manualData={{
+                            sno: "02",
+                            title: "NextJs Tutorial",
+                            timestamp: "Feb 20, 2021",
+                            createdBy: "chetan",
+                            url: "/tutorials",
+                        }}
                     />
                     <TrendingCard
-                        sno='03'
-                        title='SCSS Tutorial'
-                        timestamp='May 10, 2021'
-                        user='chetan'
-                        url='/tutorials'
+                        manualData={{
+                            sno: "03",
+                            title: "SCSS Tutorial",
+                            timestamp: "May 10, 2021",
+                            createdBy: "chetan",
+                            url: "/tutorials",
+                        }}
                     />
                 </div>
                 <div className='headline'>
@@ -76,6 +82,30 @@ export default function Tutorialspage() {
                             width='560'
                             height='315'
                             src='https://www.youtube.com/embed/f-9LEoYYvE4'
+                            title='YouTube video player'
+                            frameBorder='0'
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                            allowFullScreen></iframe>
+                        <iframe
+                            width='560'
+                            height='315'
+                            src='https://www.youtube.com/embed/uWUNZ4u1VLA'
+                            title='YouTube video player'
+                            frameBorder='0'
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                            allowFullScreen></iframe>
+                        <iframe
+                            width='560'
+                            height='315'
+                            src='https://www.youtube.com/embed/YesSVqjcDts'
+                            title='YouTube video player'
+                            frameBorder='0'
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                            allowFullScreen></iframe>
+                        <iframe
+                            width='560'
+                            height='315'
+                            src='https://www.youtube.com/embed/DvpSKoCyN5Q'
                             title='YouTube video player'
                             frameBorder='0'
                             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'

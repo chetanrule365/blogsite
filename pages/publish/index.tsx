@@ -10,6 +10,8 @@ import firebase from "firebase";
 import InitializefirebaseApp from "../../services/InitializefirebaseApp";
 import Link from "next/link";
 import SimpleHeader from "../../components/Header/SimpleHeader";
+import AlertBox from "../../components/AlertBox/AlertBox";
+import Loader from "../../components/Loader/Loader";
 InitializefirebaseApp();
 function Publish(props: any) {
     const [title, setTitle] = useState("");
@@ -21,109 +23,64 @@ function Publish(props: any) {
     const [thumbnail, setThumbnail] = useState<any>("");
     const [isReact, setIsReact] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
-    const [error, setError] = useState("Please fill out all fields.");
+    const [showPublishAlert, setshowPublishAlert] = useState(false);
+    const [error, setError] = useState("Please Fill Out Required Fields.");
     const [loading, setLoading] = useState(false);
     const [fromPropsThumbnail, setFromPropsThumbnail] = useState("");
     const [likes, setLikes] = useState(0);
-    const [category, setCategory] = useState("frontend");
     const publish = async () => {
-        if (title && desc && reactCode) {
-            setLoading(true);
-            if (thumbnail) {
-                if (props.location.state) {
-                    let url = "";
-                    if (typeof thumbnail !== "string") {
-                        if (thumbnail.size >= 2000000) {
-                            setError(
-                                "Thumbnail size should be <= 2MB. Try again...",
-                            );
-                            setShowAlert(true);
-                        } else {
-                            await firebase
-                                .storage()
-                                .refFromURL(fromPropsThumbnail)
-                                .delete();
-                            let thumbnail_ref = firebase
-                                .storage()
-                                .ref("thumbnails")
-                                .child(`${thumbnail.name}${Date.now()}`);
-                            await thumbnail_ref.put(thumbnail);
-                            url = await thumbnail_ref.getDownloadURL();
-                        }
-                    } else {
-                        url = thumbnail;
-                    }
-                    if (url) {
-                        await firebase
+        if (!title) {
+            setError("Blog Title is missing");
+            setShowAlert(true);
+        } else if (!desc) {
+            setError("Blog Description is missing");
+            setShowAlert(true);
+        } else if (!thumbnail) {
+            setError("Blog Thumbnail is missing");
+            setShowAlert(true);
+        } else {
+            if (thumbnail.size >= 5000000) {
+                setError("Thumbnail size should be <= 5MB. Try again");
+                setShowAlert(true);
+            } else {
+                setLoading(true);
+                let thumbnail_ref = firebase
+                    .storage()
+                    .ref("thumbnails")
+                    .child(`${thumbnail.name}${Date.now()}`);
+                await thumbnail_ref
+                    .put(thumbnail)
+                    .then(async () => {
+                        const url = await thumbnail_ref.getDownloadURL();
+                        let newDoc = firebase
                             .firestore()
                             .collection("frontEndBlogs")
-                            .doc(props.location.state.id)
-                            .update({
-                                title: title,
-                                desc: desc,
-                                inDetail: inDetail,
-                                isReact: isReact,
-                                reactCode: reactCode,
-                                scssCode: scssCode,
-                                jsCode: isReact ? "no code" : jsCode,
-                                thumbnail: url,
-                                timestamp: Date.now(),
-                            });
-                        setError("Hurray!!! Your blog updated.");
-                        setShowAlert(true);
-                    }
-                } else {
-                    if (thumbnail.size >= 2000000) {
-                        setError(
-                            "Thumbnail size should be <= 2MB. Try again...",
-                        );
-                        setShowAlert(true);
-                    } else {
-                        let thumbnail_ref = firebase
-                            .storage()
-                            .ref("thumbnails")
-                            .child(`${thumbnail.name}${Date.now()}`);
-                        await thumbnail_ref
-                            .put(thumbnail)
-                            .then(async () => {
-                                const url =
-                                    await thumbnail_ref.getDownloadURL();
-                                let newDoc = firebase
-                                    .firestore()
-                                    .collection("frontEndBlogs")
-                                    .doc();
+                            .doc();
 
-                                await newDoc.set({
-                                    id: newDoc.id,
-                                    title: title,
-                                    desc: desc,
-                                    inDetail: inDetail,
-                                    isReact: isReact,
-                                    reactCode: reactCode,
-                                    scssCode: scssCode,
-                                    jsCode: isReact ? "no code" : jsCode,
-                                    thumbnail: url,
-                                    timestamp: Date.now(),
-                                    createdBy:
-                                        firebase.auth().currentUser
-                                            ?.displayName,
-                                    likes: likes,
-                                });
-                                setError("Hurray!!! Your blog Published.");
-                                setShowAlert(true);
-                            })
-                            .catch((e) => {
-                                setError(e);
-                                setShowAlert(true);
-                            });
-                    }
-                }
-            } else {
-                setError("Please choose thumbnail.");
-                setShowAlert(true);
+                        await newDoc.set({
+                            id: newDoc.id,
+                            title: title,
+                            desc: desc,
+                            inDetail: inDetail,
+                            isReact: isReact,
+                            reactCode: reactCode,
+                            scssCode: scssCode,
+                            jsCode: isReact ? "no code" : jsCode,
+                            thumbnail: url,
+                            timestamp: Date.now(),
+                            createdBy: firebase.auth().currentUser?.displayName,
+                            likes: likes,
+                        });
+                        setError("Hurray!!! Your blog Published.");
+                        setshowPublishAlert(true);
+                    })
+                    .catch((e) => {
+                        setError(e);
+                        setShowAlert(true);
+                    })
+                    .finally(() => setLoading(false));
             }
-            setLoading(false);
-        } else setShowAlert(true);
+        }
     };
     useEffect(() => {
         if (props.location && props.location.state) {
@@ -158,19 +115,20 @@ function Publish(props: any) {
                     <ArrowBackRounded />
                 </IconButton>
             </Link>
-            <div>
-                {/* <IonAlert
-                    isOpen={showAlert}
-                    onDidDismiss={() => setShowAlert(false)}
-                    header={"Message"}
+            {showPublishAlert && (
+                <AlertBox
                     message={error}
-                    buttons={["OK"]}
+                    onClose={() => {
+                        setshowPublishAlert(false);
+                        window.location.replace("/myblogs");
+                    }}
                 />
-                <IonLoading
-                    isOpen={loading}
-                    onDidDismiss={() => setLoading(false)}
-                    message={"Publishing. Please wait..."}
-                /> */}
+            )}
+            {showAlert && (
+                <AlertBox message={error} onClose={() => setShowAlert(false)} />
+            )}
+            {loading && <Loader />}
+            <div>
                 <div className='form'>
                     <p>Publish your favourite blog.</p>
                     <input

@@ -6,18 +6,30 @@ import Header from "../components/Header/Header";
 import TrendingCard from "../components/TrendingCard/TrendingCard";
 import firebase from "firebase";
 import InitializefirebaseApp from "../services/InitializefirebaseApp";
+import Footer from "../components/Footer/Footer";
+import Loader from "../components/Loader/Loader";
+import { Button } from "@material-ui/core";
 InitializefirebaseApp();
 export default function Blogspage() {
     const [blogs, setblogs] = useState<any[]>([]);
+    const [trending_blogs, settrending_blogs] = useState<any[]>([]);
+    const [loading, setloading] = useState(true);
+    const [blogCount, setBlogCount] = useState(6);
     useEffect(() => {
         firebase
             .firestore()
             .collection("frontEndBlogs")
+            .limit(blogCount)
+            .orderBy("timestamp", "desc")
             .get()
             .then((res) => {
                 setblogs(res.docs.map((doc) => doc));
+                setloading(false);
             });
-    }, []);
+    }, [blogCount]);
+    useEffect(() => {
+        settrending_blogs(blogs.slice(0, 6));
+    }, [blogs]);
     return (
         <>
             <Head>
@@ -25,6 +37,7 @@ export default function Blogspage() {
             </Head>
             <div className='home'>
                 <Header switchURL='/tutorials' />
+                {loading && <Loader />}
                 <div className='search-btn'>
                     <input type='text' placeholder='Search' />
                     <Search />
@@ -34,37 +47,24 @@ export default function Blogspage() {
                     <p>Trending</p>
                 </div>
                 <div className='trending-cards'>
-                    <TrendingCard
-                        sno='01'
-                        title='ReactJs Blog'
-                        timestamp='Feb 4, 2021'
-                        user='chetan'
-                        url='/blogview'
-                    />
-                    <TrendingCard
-                        sno='02'
-                        title='NextJs Blog'
-                        timestamp='Apr 14, 2021'
-                        user='chetan'
-                        url='/'
-                    />
-                    <TrendingCard
-                        sno='03'
-                        title='SCSS Blog'
-                        timestamp='May 3, 2021'
-                        user='chetan'
-                        url='/'
-                    />
+                    {trending_blogs.map((blog, x) => (
+                        <TrendingCard sno={`0${x + 1}`} blog={blog} />
+                    ))}
                 </div>
                 <div className='headline'>
                     <CodeRounded />
-                    <p>Web Dev</p>
+                    <p>Tech Blogs</p>
                 </div>
                 <div className='content'>
                     <div className='blog-cards'>
                         {blogs.map((doc) => (
                             <BlogCard blog={doc} key={doc.id} />
                         ))}
+                        <Button
+                            onClick={() => setBlogCount(blogCount + 6)}
+                            className='load-more'>
+                            Load More
+                        </Button>
                     </div>
                     <div className='videos'>
                         <h3>Tech Videos</h3>
@@ -76,9 +76,34 @@ export default function Blogspage() {
                             frameBorder='0'
                             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
                             allowFullScreen></iframe>
+                        <iframe
+                            width='560'
+                            height='315'
+                            src='https://www.youtube.com/embed/uWUNZ4u1VLA'
+                            title='YouTube video player'
+                            frameBorder='0'
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                            allowFullScreen></iframe>
+                        <iframe
+                            width='560'
+                            height='315'
+                            src='https://www.youtube.com/embed/YesSVqjcDts'
+                            title='YouTube video player'
+                            frameBorder='0'
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                            allowFullScreen></iframe>
+                        <iframe
+                            width='560'
+                            height='315'
+                            src='https://www.youtube.com/embed/DvpSKoCyN5Q'
+                            title='YouTube video player'
+                            frameBorder='0'
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                            allowFullScreen></iframe>
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

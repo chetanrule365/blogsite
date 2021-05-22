@@ -48,7 +48,7 @@ export default function Blogspage() {
                 </div>
                 <div className='trending-cards'>
                     {trending_blogs.map((blog, x) => (
-                        <TrendingCard sno={`0${x + 1}`} blog={blog} />
+                        <TrendingCard key={x} sno={`0${x + 1}`} blog={blog} />
                     ))}
                 </div>
                 <div className='headline'>

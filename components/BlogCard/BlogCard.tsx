@@ -5,12 +5,17 @@ import {
     FavoriteBorderRounded,
     FavoriteRounded,
     MoreHorizRounded,
+    PersonAddOutlined,
+    ReportOutlined,
     Share,
 } from "@material-ui/icons";
 import Link from "next/link";
 import moment from "moment";
 import { useState } from "react";
 import Popover from "@material-ui/core/Popover";
+import Head from "next/head";
+import firebase from "firebase";
+import AlertBox from "../AlertBox/AlertBox";
 export default function BlogCard({
     blog,
     isFav,
@@ -31,17 +36,28 @@ export default function BlogCard({
     const handleClose = () => {
         setAnchorEl(null);
     };
-
-    const open = Boolean(anchorEl);
-    const id = open ? "simple-popover" : undefined;
+    const [showPop, setshowPop] = useState(false);
+    const [showOwnerPop, setshowOwnerPop] = useState(false);
+    const [showAlert, setshowAlert] = useState(false);
     return (
         <>
+            <Head>
+                <title>My Blogs</title>
+            </Head>
             <div className='blog-card' key={blog.id}>
+                {showAlert && (
+                    <AlertBox
+                        message='Please Login first'
+                        onClose={() => setshowAlert(false)}
+                    />
+                )}
                 <Popover
-                    id={id}
-                    open={open}
+                    open={showOwnerPop}
                     anchorEl={anchorEl}
-                    onClose={handleClose}
+                    onClose={() => {
+                        handleClose();
+                        setshowOwnerPop(false);
+                    }}
                     className='popover'
                     anchorOrigin={{
                         vertical: "bottom",
@@ -62,6 +78,33 @@ export default function BlogCard({
                         </Button>
                     </div>
                 </Popover>
+                <Popover
+                    open={showPop}
+                    anchorEl={anchorEl}
+                    onClose={() => {
+                        handleClose();
+                        setshowPop(false);
+                    }}
+                    className='popover'
+                    anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "center",
+                    }}
+                    transformOrigin={{
+                        vertical: "top",
+                        horizontal: "center",
+                    }}>
+                    <div className='pop-content'>
+                        <Button className='share'>
+                            <PersonAddOutlined />
+                            <p>Follow</p>
+                        </Button>
+                        <Button className='delete'>
+                            <ReportOutlined />
+                            <p>Report</p>
+                        </Button>
+                    </div>
+                </Popover>
                 <div className='info'>
                     <Link href={`/blogs/${blog.id}`}>
                         <div className='details'>
@@ -79,26 +122,43 @@ export default function BlogCard({
                                     <Edit />
                                 </IconButton>
                             ) : (
-                                <IconButton
-                                    className='fav_btn'
-                                    onClick={async () => {
-                                        setIsFavourite(!isFavourite);
-                                    }}>
-                                    {isFavourite ? (
-                                        <FavoriteRounded />
-                                    ) : (
-                                        <FavoriteBorderRounded />
-                                    )}
-                                </IconButton>
+                                firebase.auth().currentUser && (
+                                    <IconButton
+                                        className='fav_btn'
+                                        onClick={async () => {
+                                            setIsFavourite(!isFavourite);
+                                        }}>
+                                        {isFavourite ? (
+                                            <FavoriteRounded />
+                                        ) : (
+                                            <FavoriteBorderRounded />
+                                        )}
+                                    </IconButton>
+                                )
                             )}
                             {isOwner ? (
-                                <IconButton onClick={handleClick}>
+                                <IconButton
+                                    onClick={(e) => {
+                                        handleClick(e);
+                                        setshowOwnerPop(true);
+                                    }}>
                                     <MoreHorizRounded />
                                 </IconButton>
                             ) : (
-                                <IconButton className='share-btn'>
-                                    <Share />
-                                </IconButton>
+                                <>
+                                    <IconButton className='share-btn'>
+                                        <Share />
+                                    </IconButton>
+                                    {firebase.auth().currentUser && (
+                                        <IconButton
+                                            onClick={(e) => {
+                                                handleClick(e);
+                                                setshowPop(true);
+                                            }}>
+                                            <MoreHorizRounded />
+                                        </IconButton>
+                                    )}
+                                </>
                             )}
                         </div>
                     </div>

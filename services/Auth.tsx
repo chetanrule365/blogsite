@@ -24,42 +24,13 @@ const signInWithGoogle = (setError: (e: string) => void) => {
         .catch((e) => setError(e));
 };
 const signUpWithEmail = async (
-    name: string,
     email: string,
     password: string,
     setError: (e: string) => void,
 ) => {
-    let users_ref = firebase.firestore().collection("users");
-    const uname = name.toUpperCase();
-    users_ref
-        .where("username", "==", uname)
-        .get()
-        .then(async (data) => {
-            if (data.docs.length === 0) {
-                await auth
-                    .createUserWithEmailAndPassword(email, password)
-                    .then(async (result) => {
-                        if (result.user)
-                            await users_ref
-                                .doc(result.user.uid)
-                                .set({
-                                    username: uname,
-                                })
-                                .then(async () => {
-                                    if (auth.currentUser)
-                                        await auth.currentUser.updateProfile({
-                                            displayName: uname,
-                                        });
-                                });
-                    })
-                    .catch((e) => {
-                        setError(e);
-                    });
-            } else setError("Username already exists. Try another...");
-        })
-        .catch((e) => {
-            setError(e);
-        });
+    await auth
+        .createUserWithEmailAndPassword(email, password)
+        .catch((e) => setError(e));
 };
 const signInWithEmail = async (
     email: string,

@@ -8,6 +8,7 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import moment from "moment";
+import firebase from "firebase";
 export default function TrendingCard({
     sno,
     blog,
@@ -42,20 +43,28 @@ export default function TrendingCard({
                         </div>
                     </Link>
                     <div className='right'>
-                        <IconButton
-                            className='fav_btn'
-                            style={{ padding: "8px" }}
-                            onClick={() => setisFav(!isFav)}>
-                            {isFav ? (
-                                <FavoriteRounded
-                                    style={{ width: "20px", height: "20px" }}
-                                />
-                            ) : (
-                                <FavoriteBorderRounded
-                                    style={{ width: "20px", height: "20px" }}
-                                />
-                            )}
-                        </IconButton>
+                        {firebase.auth().currentUser && (
+                            <IconButton
+                                className='fav_btn'
+                                style={{ padding: "8px" }}
+                                onClick={() => setisFav(!isFav)}>
+                                {isFav ? (
+                                    <FavoriteRounded
+                                        style={{
+                                            width: "20px",
+                                            height: "20px",
+                                        }}
+                                    />
+                                ) : (
+                                    <FavoriteBorderRounded
+                                        style={{
+                                            width: "20px",
+                                            height: "20px",
+                                        }}
+                                    />
+                                )}
+                            </IconButton>
+                        )}
                         <IconButton>
                             <Share style={{ width: "20px", height: "20px" }} />
                         </IconButton>

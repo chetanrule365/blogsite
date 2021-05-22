@@ -22,6 +22,7 @@ function SimpleHeader() {
             if (!user) {
                 setUser(undefined);
                 localStorage.setItem("uid", "");
+                window.location.reload();
             } else {
                 setUser(user);
                 localStorage.setItem("uid", user.uid);
@@ -39,7 +40,7 @@ function SimpleHeader() {
                     <hr />
                     <p className='greet'>
                         <em>Good Morning! </em>
-                        {firebase.auth().currentUser?.displayName}
+                        {firebase.auth().currentUser?.displayName || "New User"}
                     </p>
                 </div>
                 <div className='right-con'>
@@ -67,17 +68,9 @@ function SimpleHeader() {
                                     ele.classList.toggle("show");
                                 }
                             }}>
-                            {firebase.auth().currentUser?.photoURL ? (
-                                <img
-                                    className='avatar'
-                                    src={`${
-                                        firebase.auth().currentUser?.photoURL
-                                    }`}
-                                    alt=''
-                                />
-                            ) : (
-                                <Avatar />
-                            )}
+                            <Avatar
+                                src={`${firebase.auth().currentUser?.photoURL}`}
+                            />
                         </IconButton>
                     )}
                 </div>
@@ -102,18 +95,12 @@ function SimpleHeader() {
                         <div className='profile'>
                             <div className='info'>
                                 <IconButton>
-                                    {firebase.auth().currentUser?.photoURL ? (
-                                        <img
-                                            className='avatar'
-                                            src={`${
-                                                firebase.auth().currentUser
-                                                    ?.photoURL
-                                            }`}
-                                            alt=''
-                                        />
-                                    ) : (
-                                        <Avatar className='avatar' />
-                                    )}
+                                    <Avatar
+                                        src={`${
+                                            firebase.auth().currentUser
+                                                ?.photoURL
+                                        }`}
+                                    />
                                 </IconButton>
                                 <div className='name'>
                                     {firebase.auth().currentUser?.displayName}

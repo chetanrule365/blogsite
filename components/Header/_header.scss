@@ -61,30 +61,32 @@
         }
         .right-con {
             @include flex-center(row, flex-end, center);
-            width: 70%;
+            width: 100%;
             #right {
-                width: 100%;
-                @include flex-center(row, flex-end, center);
-                .search {
-                    border: 2px solid map-get($map: $colors, $key: primary);
-                    border-radius: 5px;
-                    @include flex-center(row, center, center);
-                    padding: 6px 12px;
-                    width: 50%;
-                    background: white;
-                    margin-right: 16px;
-                    input {
-                        width: 100%;
-                        border: none;
-                        outline: none;
-                    }
-                }
-                @media screen and (max-width: $tab-width) {
+                @media screen and (max-width: 800px) {
                     display: none;
                     visibility: hidden;
                 }
+                @media screen and (min-width: 801px) {
+                    width: 70%;
+                    @include flex-center(row, flex-end, center);
+                    .search {
+                        border: 2px solid map-get($map: $colors, $key: primary);
+                        border-radius: 5px;
+                        @include flex-center(row, center, center);
+                        padding: 6px 12px;
+                        width: 50%;
+                        background: white;
+                        margin-right: 16px;
+                        input {
+                            width: 100%;
+                            border: none;
+                            outline: none;
+                        }
+                    }
+                }
                 Button {
-                    margin-left: 8px;
+                    margin: 0 8px;
                 }
             }
             .avatar {

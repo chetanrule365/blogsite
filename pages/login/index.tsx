@@ -10,6 +10,7 @@ import firebase from "firebase";
 import Link from "next/link";
 import SimpleHeader from "../../components/Header/SimpleHeader";
 import AlertBox from "../../components/AlertBox/AlertBox";
+import Loader from "../../components/Loader/Loader";
 
 function Login() {
     const [loginType, setLoginType] = useState("login");
@@ -35,7 +36,7 @@ function Login() {
                     <ArrowBackRounded />
                 </IconButton>
             </Link>
-
+            {loading && <Loader />}
             <div className='login_con'>
                 {showAlert && (
                     <AlertBox
@@ -61,14 +62,6 @@ function Login() {
                     </Button>
                     <p style={{ fontSize: "28px" }}>OR</p>
                     <form action=''>
-                        {loginType === "signup" && (
-                            <input
-                                type='text'
-                                placeholder='username'
-                                value={name}
-                                onChange={(e) => setname(e.target.value)}
-                            />
-                        )}
                         <input
                             type='email'
                             placeholder='Enter Email'
@@ -111,12 +104,7 @@ function Login() {
                                         setShowAlert(true);
                                     }
                                 } else if (loginType === "signup") {
-                                    if (name.trim().length < 3) {
-                                        setError(
-                                            "Username should be atleast 3 chars long",
-                                        );
-                                        setShowAlert(true);
-                                    } else if (password.trim().length < 3) {
+                                    if (password.trim().length < 3) {
                                         setError(
                                             "Password should be atleast 3 chars long",
                                         );
@@ -126,7 +114,6 @@ function Login() {
                                         setShowAlert(true);
                                     } else {
                                         signUpWithEmail(
-                                            name.trim(),
                                             email.trim(),
                                             password,
                                             (e) => {

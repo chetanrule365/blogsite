@@ -26,6 +26,7 @@ export default function Header({ switchURL }: header) {
             if (!user) {
                 setUser(undefined);
                 localStorage.setItem("uid", "");
+                window.location.reload();
             } else {
                 setUser(user);
                 localStorage.setItem("uid", user.uid);
@@ -42,7 +43,7 @@ export default function Header({ switchURL }: header) {
                     <hr />
                     <p className='greet'>
                         <em>Good Morning! </em>
-                        {firebase.auth().currentUser?.displayName}
+                        {firebase.auth().currentUser?.displayName || "New User"}
                     </p>
                 </div>
                 <div className='right-con'>
@@ -57,7 +58,7 @@ export default function Header({ switchURL }: header) {
                         {switchURL ? (
                             <Link href={switchURL}>
                                 <Button className='switch'>
-                                    Switch to {text}
+                                    Switch&nbsp;to&nbsp;{text}
                                 </Button>
                             </Link>
                         ) : (
@@ -89,18 +90,11 @@ export default function Header({ switchURL }: header) {
                                         ele.classList.toggle("show");
                                     }
                                 }}>
-                                {firebase.auth().currentUser?.photoURL ? (
-                                    <img
-                                        className='avatar'
-                                        src={`${
-                                            firebase.auth().currentUser
-                                                ?.photoURL
-                                        }`}
-                                        alt=''
-                                    />
-                                ) : (
-                                    <Avatar />
-                                )}
+                                <Avatar
+                                    src={`${
+                                        firebase.auth().currentUser?.photoURL
+                                    }`}
+                                />
                             </IconButton>
                         </>
                     )}
@@ -126,18 +120,12 @@ export default function Header({ switchURL }: header) {
                         <div className='profile'>
                             <div className='info'>
                                 <IconButton>
-                                    {firebase.auth().currentUser?.photoURL ? (
-                                        <img
-                                            className='avatar'
-                                            src={`${
-                                                firebase.auth().currentUser
-                                                    ?.photoURL
-                                            }`}
-                                            alt=''
-                                        />
-                                    ) : (
-                                        <Avatar className='avatar' />
-                                    )}
+                                    <Avatar
+                                        src={`${
+                                            firebase.auth().currentUser
+                                                ?.photoURL
+                                        }`}
+                                    />
                                 </IconButton>
                                 <div className='name'>
                                     {firebase.auth().currentUser?.displayName}

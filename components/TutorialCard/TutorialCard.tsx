@@ -6,8 +6,8 @@ import {
     Share,
 } from "@material-ui/icons";
 import Link from "next/link";
-import moment from "moment";
 import { useState } from "react";
+import firebase from "firebase";
 interface tutorialCardProps {
     title: String;
     desc: String;
@@ -36,18 +36,20 @@ export default function TutorialCard({
                 </Link>
                 <div className='bottom'>
                     <div className='timestamp'>
-                        {moment(timestamp).format("ll")}. By {user}
+                        {timestamp}. By {user}
                     </div>
                     <div className='right'>
-                        <IconButton
-                            className='fav_btn'
-                            onClick={() => setisFav(!isFav)}>
-                            {isFav ? (
-                                <FavoriteRounded />
-                            ) : (
-                                <FavoriteBorderRounded />
-                            )}
-                        </IconButton>
+                        {firebase.auth().currentUser && (
+                            <IconButton
+                                className='fav_btn'
+                                onClick={() => setisFav(!isFav)}>
+                                {isFav ? (
+                                    <FavoriteRounded />
+                                ) : (
+                                    <FavoriteBorderRounded />
+                                )}
+                            </IconButton>
+                        )}
                         <IconButton>
                             <Share />
                         </IconButton>

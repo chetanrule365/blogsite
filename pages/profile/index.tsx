@@ -6,15 +6,17 @@ import firebase from "firebase";
 import InitializefirebaseApp from "../../services/InitializefirebaseApp";
 import Link from "next/link";
 import SimpleHeader from "../../components/Header/SimpleHeader";
+import AlertBox from "../../components/AlertBox/AlertBox";
+import Loader from "../../components/Loader/Loader";
 InitializefirebaseApp();
 function Settings() {
     const [user, setUser] = useState<firebase.UserInfo>();
-    const [username, setUsername] = useState<any>("");
-    const [unameInput, setUnameInput] = useState<any>("");
+    const [username, setUsername] = useState("");
+    const [unameInput, setUnameInput] = useState("");
     const [editName, setEditName] = useState(false);
     const [email, setEmail] = useState<any>("");
     const [editEmail, setEditEmail] = useState(false);
-    const [photoUrl, setPhotoUrl] = useState<any>("");
+    const [photoUrl, setPhotoUrl] = useState("");
     const [error, setError] = useState("");
     const [showAlert, setShowAlert] = useState(false);
     const [showPrompt, setShowPrompt] = useState(false);
@@ -25,10 +27,12 @@ function Settings() {
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 setUser(user);
-                setUsername(user.displayName);
-                setUnameInput(user.displayName);
+                if (user.displayName) {
+                    setUsername(user.displayName);
+                    setUnameInput(user.displayName);
+                }
                 setEmail(user.email);
-                setPhotoUrl(user.photoURL);
+                if (user.photoURL) setPhotoUrl(user.photoURL);
             } else window.location.replace("/");
         });
     }, []);
@@ -36,13 +40,13 @@ function Settings() {
         <>
             <SimpleHeader />
             <div className='profile-page'>
-                {/* <IonAlert
-                header='Message'
-                message={error}
-                isOpen={showAlert}
-                onDidDismiss={() => setShowAlert(false)}
-                buttons={["ok"]}
-            />
+                {showAlert && (
+                    <AlertBox
+                        message={error}
+                        onClose={() => setShowAlert(false)}
+                    />
+                )}
+                {/*
             <IonAlert
                 header='Confirm'
                 message={error}
@@ -110,6 +114,7 @@ function Settings() {
                     },
                 ]}
             /> */}
+                {showLoading && <Loader />}
                 <header>
                     <Link href='/'>
                         <IconButton
@@ -128,7 +133,13 @@ function Settings() {
                                 id='name'
                                 type='text'
                                 placeholder='Username'
-                                value={editName ? unameInput : username}
+                                value={
+                                    editName
+                                        ? unameInput
+                                        : username
+                                        ? username
+                                        : "New User"
+                                }
                                 readOnly={!editName}
                                 onChange={(e) => {
                                     setUnameInput(e.target.value.toUpperCase());
@@ -139,11 +150,11 @@ function Settings() {
                             {editName && (
                                 <Button
                                     className='edit_butt'
-                                    onClick={() => {
+                                    onClick={async () => {
                                         let uname = unameInput.trim();
                                         if (uname.length > 3) {
                                             setShowLoading(true);
-                                            usersColl_ref
+                                            await usersColl_ref
                                                 .where("username", "==", uname)
                                                 .get()
                                                 .then((data) => {
@@ -216,9 +227,10 @@ function Settings() {
                                                         setUnameInput(username);
                                                         setShowAlert(true);
                                                     }
-                                                });
-
-                                            setShowLoading(false);
+                                                })
+                                                .finally(() =>
+                                                    setShowLoading(false),
+                                                );
                                         } else {
                                             setError(
                                                 "Username should be atleast 3 chars.",
@@ -260,9 +272,9 @@ function Settings() {
                         <div className='butts'>
                             <Button
                                 className='edit_butt'
-                                onClick={() => {
+                                onClick={async () => {
                                     setShowLoading(true);
-                                    firebase
+                                    await firebase
                                         .auth()
                                         .currentUser?.updateProfile({
                                             photoURL: "",
@@ -287,8 +299,8 @@ function Settings() {
                                         .catch((e) => {
                                             setError(e);
                                             setShowAlert(true);
-                                        });
-                                    setShowLoading(false);
+                                        })
+                                        .finally(() => setShowLoading(false));
                                 }}>
                                 Delete
                             </Button>
@@ -342,7 +354,10 @@ function Settings() {
                                                         "Fail to update. Try again...",
                                                     );
                                                     setShowAlert(true);
-                                                });
+                                                })
+                                                .finally(() =>
+                                                    setShowLoading(false),
+                                                );
                                             setShowLoading(false);
                                         } else {
                                             setError("Unsupported format.");
@@ -385,8 +400,10 @@ function Settings() {
                                                     setError(e);
                                                     setShowAlert(true);
                                                     setEmail(user?.email);
-                                                });
-                                            setShowLoading(false);
+                                                })
+                                                .finally(() =>
+                                                    setShowLoading(false),
+                                                );
                                         } else {
                                             setError(
                                                 "Invalid Email. Try again...",
@@ -418,6 +435,7 @@ function Settings() {
                         <Button
                             className='butt'
                             onClick={async () => {
+                                setShowLoading(true);
                                 await firebase
                                     .auth()
                                     .sendPasswordResetEmail(
@@ -432,7 +450,8 @@ function Settings() {
                                     .catch((error) => {
                                         setError(error);
                                         setShowAlert(true);
-                                    });
+                                    })
+                                    .finally(() => setShowLoading(false));
                             }}>
                             Reset Password
                         </Button>
@@ -442,10 +461,10 @@ function Settings() {
                         <Button
                             className='butt'
                             onClick={() => {
-                                setError(
-                                    "This action will delete all the data (including the blogs) regarding to you. Are you sure you want to do this.",
-                                );
-                                setShowPrompt(true);
+                                // setError(
+                                //     "This action will delete all the data (including the blogs) regarding to you. Are you sure you want to do this.",
+                                // );
+                                // setShowPrompt(true);
                             }}>
                             Delete Account
                         </Button>

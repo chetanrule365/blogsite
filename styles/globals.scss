@@ -1,4 +1,5 @@
 @import "./variables";
+@import url("https://fonts.googleapis.com/css2?family=KoHo:wght@400;500;600;700&display=swap");
 body,
 html {
     // background: var(--bkground-color);
@@ -9,8 +10,7 @@ html {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: "KoHo", sans-serif;
     scroll-behavior: smooth;
 }
 $mobWidth: 520px;

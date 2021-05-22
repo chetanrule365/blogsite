@@ -22,7 +22,6 @@ function SimpleHeader() {
             if (!user) {
                 setUser(undefined);
                 localStorage.setItem("uid", "");
-                window.location.reload();
             } else {
                 setUser(user);
                 localStorage.setItem("uid", user.uid);
